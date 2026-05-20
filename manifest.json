@@ -1,0 +1,22 @@
+{
+  "name": "Coloso - Mock Data",
+  "id": "1636639642262986926",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "http://localhost:8001"
+    ],
+    "reasoning": "Local development image server for mock data asset testing.",
+    "devAllowedDomains": [
+      "http://localhost:8001"
+    ]
+  }
+}

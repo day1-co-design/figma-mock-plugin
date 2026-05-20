@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Coloso Mock Data</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        --bg: #ffffff;
+        --text: #18181b;
+        --muted: #a1a1aa;
+        --line: #d4d4d8;
+        --line-strong: #dcdcdc;
+        --chip: #ffffff;
+        --chip-active: #27272a;
+        --chip-active-text: #ffffff;
+        --panel: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 320px;
+        height: 520px;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        font-size: 12px;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .panel {
+        width: 320px;
+        height: 520px;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+      }
+
+      .tabs {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        padding: 6px 8px 0;
+        height: 41px;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .tab {
+        position: relative;
+        width: 64px;
+        height: 35px;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .tab.active {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .tab.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 1px;
+        background: var(--text);
+      }
+
+      .scroll-area {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-bottom: 0;
+      }
+
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        height: 46px;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-header.split {
+        justify-content: space-between;
+      }
+
+      .section-header.with-line {
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .section-header.center-title {
+        position: relative;
+        justify-content: center;
+      }
+
+      .section-header.center-title .section-title {
+        text-align: center;
+      }
+
+      .section-action {
+        border: 0;
+        background: transparent;
+        color: var(--text);
+        line-height: 1;
+        width: 18px;
+        height: 18px;
+        padding: 0;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .section-header.center-title .section-action {
+        position: absolute;
+        left: 16px;
+      }
+
+      .image-view {
+        display: none;
+      }
+
+      .image-view.active {
+        display: block;
+      }
+
+      .block {
+        padding: 10px 16px 12px;
+      }
+
+      .button-block {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 12px 16px 0;
+        background: transparent;
+      }
+
+      .block + .block {
+        border-top: 1px solid transparent;
+      }
+
+      .field-label {
+        margin: 0 0 8px;
+        padding-left: 2px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #27272a;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 6px;
+      }
+
+      .chip {
+        height: 34px;
+        border: 1px solid var(--line);
+        background: var(--chip);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 10px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chip.active {
+        border-color: var(--text);
+        background: var(--chip-active);
+        color: var(--chip-active-text);
+      }
+
+      .chip.disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .helper {
+        margin: 14px 16px 0;
+        font-size: 11px;
+        line-height: 1.55;
+        color: #686868;
+      }
+
+      .status-text {
+        margin: 14px 16px 0;
+        font-size: 11px;
+        line-height: 1.55;
+        color: #686868;
+      }
+
+      .dev-only {
+        display: none;
+      }
+
+      .creator-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .creator-item {
+        width: 100%;
+        min-height: 45px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        border-radius: 0;
+        padding: 0 20px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .creator-item.active {
+        background: transparent;
+        color: var(--text);
+      }
+
+      .creator-item-check {
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--text);
+        border-radius: 4px;
+        flex: 0 0 auto;
+        position: relative;
+      }
+
+      .creator-item.active .creator-item-check {
+        background: var(--text);
+      }
+
+      .creator-item.active .creator-item-check::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 4px;
+        height: 8px;
+        border-right: 1.5px solid #ffffff;
+        border-bottom: 1.5px solid #ffffff;
+        transform: rotate(45deg);
+      }
+
+      .creator-item-label {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .creator-filter-block {
+        padding: 12px 16px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .border-gap-block {
+        padding-bottom: 12px;
+      }
+
+      .creator-list-block {
+        padding-top: 13px;
+      }
+
+      .nav-icon {
+        width: 18px;
+        height: 18px;
+        display: block;
+        flex: 0 0 auto;
+      }
+
+      .nav-icon path {
+        stroke: #09090b;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .nav-icon.back {
+        transform: rotate(180deg);
+      }
+
+      .footer {
+        flex: 0 0 auto;
+        padding: 12px 16px 16px;
+        border-top: 0;
+        background: #ffffff;
+      }
+
+      .action-button {
+        width: 100%;
+        height: 41px;
+        border: 1px solid var(--text);
+        border-radius: 6px;
+        background: var(--text);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .action-button:disabled {
+        opacity: 0.38;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="panel">
+      <nav class="tabs" aria-label="Mock data tabs">
+        <button class="tab active" data-tab="image" type="button">Image</button>
+        <button class="tab" data-tab="text" type="button">Text</button>
+      </nav>
+
+      <div class="scroll-area">
+        <section class="page active" data-page="image">
+          <div class="image-view active" id="imageMainView">
+            <div class="section-header split">
+              <h2 class="section-title">Avatar</h2>
+              <button class="section-action" id="openCreatorPageButton" type="button" aria-label="creator list">
+                <svg class="nav-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M7 5.5L10.5 9L7 12.5"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="block button-block">
+              <p class="field-label">Type</p>
+              <div class="chip-row" id="imageTypeGroup">
+                <button class="chip" data-image-type="creator" type="button">creator</button>
+              </div>
+            </div>
+
+            <div class="block button-block border-gap-block">
+              <p class="field-label">Category</p>
+              <div class="chip-row" id="imageCategoryGroup">
+                <button class="chip" data-image-category="illust" type="button">illustration</button>
+                <button class="chip" data-image-category="video" type="button">Video</button>
+                <button class="chip" data-image-category="baking" type="button">baking</button>
+              </div>
+            </div>
+
+            <div class="section-header with-line">
+              <h2 class="section-title">Course Thumbnail</h2>
+            </div>
+
+            <div class="block button-block">
+              <p class="field-label">Type</p>
+              <div class="chip-row" id="thumbnailTypeGroup">
+                <button class="chip" data-image-type="thumbnail_cover_mobile" type="button">cover mobile</button>
+                <button class="chip" data-image-type="thumbnail_cover_pc" type="button">cover pc</button>
+                <button class="chip" data-image-type="thumbnail_list" type="button">list</button>
+                <button class="chip" data-image-type="thumbnail_product" type="button">product</button>
+              </div>
+            </div>
+
+            <div class="block button-block">
+              <p class="field-label">Category</p>
+              <div class="chip-row" id="thumbnailCategoryGroup">
+                <button class="chip" data-thumbnail-category="illust" type="button">illustration</button>
+                <button class="chip" data-thumbnail-category="video" type="button">Video</button>
+                <button class="chip" data-thumbnail-category="baking" type="button">baking</button>
+              </div>
+            </div>
+
+            <p class="status-text dev-only" id="imageStatusText">
+              카테고리를 선택한 뒤 creator 이미지를 적용할 수 있어요.
+            </p>
+          </div>
+
+          <div class="image-view" id="imageCreatorView">
+            <div class="section-header center-title">
+              <button class="section-action" id="backToImageMainButton" type="button" aria-label="back">
+                <svg class="nav-icon back" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M7 5.5L10.5 9L7 12.5"></path>
+                </svg>
+              </button>
+              <h2 class="section-title">선택 적용</h2>
+            </div>
+
+            <div class="creator-filter-block button-block">
+              <div class="chip-row" id="creatorFilterCategoryGroup">
+                <button class="chip" data-creator-filter-category="all" type="button">All</button>
+                <button class="chip" data-creator-filter-category="illust" type="button">illustration</button>
+                <button class="chip" data-creator-filter-category="video" type="button">Video</button>
+                <button class="chip" data-creator-filter-category="baking" type="button">baking</button>
+              </div>
+            </div>
+
+            <div class="creator-list-block">
+              <div class="creator-list" id="creatorList"></div>
+            </div>
+
+            <p class="status-text dev-only" id="creatorStatusText">
+              적용할 크리에이터를 선택해 주세요.
+            </p>
+          </div>
+        </section>
+
+        <section class="page" data-page="text">
+          <div class="section-header">
+            <h2 class="section-title">Course Info</h2>
+          </div>
+
+          <div class="block button-block">
+            <p class="field-label">Type</p>
+            <div class="chip-row" id="courseInfoTypeGroup">
+              <button class="chip" data-text-type="creator_name" type="button">creator</button>
+              <button class="chip" data-text-type="job_title" type="button">job</button>
+              <button class="chip" data-text-type="job_creator" type="button">job + creator</button>
+              <button class="chip" data-text-type="course_title" type="button">course title</button>
+            </div>
+          </div>
+
+          <div class="block button-block border-gap-block">
+            <p class="field-label">Category</p>
+            <div class="chip-row" id="courseCategoryGroup">
+              <button class="chip" data-course-category="illust" type="button">illustration</button>
+              <button class="chip" data-course-category="video" type="button">Video</button>
+              <button class="chip" data-course-category="baking" type="button">baking</button>
+            </div>
+          </div>
+
+          <div class="section-header with-line">
+            <h2 class="section-title">Data</h2>
+          </div>
+
+          <div class="block button-block">
+            <div class="chip-row" id="generalTypeGroup">
+              <button class="chip" data-text-type="date_yyyy" type="button">yyyy.mm.dd</button>
+              <button class="chip" data-text-type="date_yy" type="button">yy.mm.dd</button>
+            </div>
+          </div>
+
+          <p class="helper" id="helperText">
+            코스 정보 타입은 Type 1개와 Category 1개를 함께 선택해야 적용됩니다.
+          </p>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <button class="action-button" id="randomButton" type="button">적용</button>
+      </footer>
+    </main>
+
+    <script>
+      var state = {
+        activeTab: 'image',
+        textType: 'creator_name',
+        courseCategory: null,
+        imageType: 'creator',
+        imageCategory: 'baking',
+        thumbnailCategory: 'baking',
+        creatorFilterCategory: 'all',
+        imageView: 'main',
+        isApplyingImage: false,
+        imageApplyRequestId: 0
+      };
+
+      var IMAGE_BASE_ROOT = 'http://localhost:8001/assets/images/profile/';
+      var IMAGE_CREATOR_OPTIONS_BY_CATEGORY = {
+        baking: [
+          { name: '바통', url: IMAGE_BASE_ROOT + 'baking/baton.png' },
+          { name: '최은영', url: IMAGE_BASE_ROOT + 'baking/choi-eunyoung.png' },
+          { name: '최지혜', url: IMAGE_BASE_ROOT + 'baking/choi-jihye.png' },
+          { name: '최유정', url: IMAGE_BASE_ROOT + 'baking/choi-yujeong.png' },
+          { name: '고나훈', url: IMAGE_BASE_ROOT + 'baking/go-nahoon.png' },
+          { name: '홍상기', url: IMAGE_BASE_ROOT + 'baking/hong-sanggi.png' },
+          { name: '장효비', url: IMAGE_BASE_ROOT + 'baking/jang-hyobi.png' },
+          { name: '김다나', url: IMAGE_BASE_ROOT + 'baking/kim-dana.png' },
+          { name: '김지현', url: IMAGE_BASE_ROOT + 'baking/kim-jihyeon.png' },
+          { name: '이지민', url: IMAGE_BASE_ROOT + 'baking/lee-jimin.png' },
+          { name: '이준희', url: IMAGE_BASE_ROOT + 'baking/lee-junhee.png' },
+          { name: '박혜령', url: IMAGE_BASE_ROOT + 'baking/park-hyeryeong.png' },
+          { name: '박웅종', url: IMAGE_BASE_ROOT + 'baking/park-ungjong.png' },
+          { name: '신민경', url: IMAGE_BASE_ROOT + 'baking/shin-mingyeong.png' },
+          { name: '제로', url: IMAGE_BASE_ROOT + 'baking/zero.png' }
+        ],
+        video: [
+          { name: '채디', url: IMAGE_BASE_ROOT + 'Video/chedy.png' },
+          { name: '감자만세', url: IMAGE_BASE_ROOT + 'Video/gamja.png' },
+          { name: '장혜진', url: IMAGE_BASE_ROOT + 'Video/janghyejin.png' },
+          { name: '김지수', url: IMAGE_BASE_ROOT + 'Video/kimjisoo.png' },
+          { name: '김승철', url: IMAGE_BASE_ROOT + 'Video/kimseungcheol.png' },
+          { name: '키무네', url: IMAGE_BASE_ROOT + 'Video/kimune.png' },
+          { name: '이동영', url: IMAGE_BASE_ROOT + 'Video/leedongyoung.png' },
+          { name: '이재연', url: IMAGE_BASE_ROOT + 'Video/leejaeyeoun.png' },
+          { name: 'Lorde', url: IMAGE_BASE_ROOT + 'Video/lorde.png' },
+          { name: 'MANZA', url: IMAGE_BASE_ROOT + 'Video/manza.png' },
+          { name: 'Owen Kim', url: IMAGE_BASE_ROOT + 'Video/owenkim.png' },
+          { name: '파닭', url: IMAGE_BASE_ROOT + 'Video/padalg.png' },
+          { name: '조약돌', url: IMAGE_BASE_ROOT + 'Video/pebble.png' },
+          { name: '신승섭', url: IMAGE_BASE_ROOT + 'Video/shinsuengsub.png' },
+          { name: '윤성원', url: IMAGE_BASE_ROOT + 'Video/yoonseongwon.png' },
+          { name: 'Yorsh', url: IMAGE_BASE_ROOT + 'Video/yorsh.png' },
+          { name: '유은', url: IMAGE_BASE_ROOT + 'Video/yueun.png' }
+        ],
+        illust: [
+          { name: '초연', url: IMAGE_BASE_ROOT + 'illustration/choyeon.png' },
+          { name: '띵구', url: IMAGE_BASE_ROOT + 'illustration/ddingu.png' },
+          { name: '홍작가', url: IMAGE_BASE_ROOT + 'illustration/hongjacga.png' },
+          { name: '케토', url: IMAGE_BASE_ROOT + 'illustration/keto.png' },
+          { name: 'Kiru', url: IMAGE_BASE_ROOT + 'illustration/kiru.png' },
+          { name: 'M1Z', url: IMAGE_BASE_ROOT + 'illustration/m1z.png' },
+          { name: 'Mark.J', url: IMAGE_BASE_ROOT + 'illustration/markj.png' },
+          { name: 'Okku', url: IMAGE_BASE_ROOT + 'illustration/okku.png' },
+          { name: '시와', url: IMAGE_BASE_ROOT + 'illustration/siwaa.png' },
+          { name: 'Smiley Jo', url: IMAGE_BASE_ROOT + 'illustration/smiley-jo.png' },
+          { name: '소금이', url: IMAGE_BASE_ROOT + 'illustration/sogumi.png' },
+          { name: '소융', url: IMAGE_BASE_ROOT + 'illustration/soyoong.png' },
+          { name: '샤가무', url: IMAGE_BASE_ROOT + 'illustration/syagamu.png' },
+          { name: '웅돼지', url: IMAGE_BASE_ROOT + 'illustration/uoongpig.png' },
+          { name: '용사', url: IMAGE_BASE_ROOT + 'illustration/yongsa.png' },
+          { name: '영모', url: IMAGE_BASE_ROOT + 'illustration/youngmo.png' }
+        ]
+      };
+      var selectedCreatorByCategory = {
+        all: null,
+        baking: null,
+        video: null,
+        illust: null
+      };
+      var THUMBNAIL_BASE_ROOT = 'http://localhost:8001/assets/images/thumbnail/';
+      var THUMBNAIL_OPTIONS_BY_CATEGORY = {
+        illust: [
+          {
+            courseId: 'course-101',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-101/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-101/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-101/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-101/product.png'
+            }
+          },
+          {
+            courseId: 'course-102',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-102/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-102/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-102/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-102/product.png'
+            }
+          },
+          {
+            courseId: 'course-103',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-103/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-103/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-103/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-103/product.png'
+            }
+          },
+          {
+            courseId: 'course-104',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-104/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-104/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-104/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-104/product.png'
+            }
+          },
+          {
+            courseId: 'course-105',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-105/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-105/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-105/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-105/product.png'
+            }
+          },
+          {
+            courseId: 'course-106',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-106/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-106/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-106/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-106/product.png'
+            }
+          },
+          {
+            courseId: 'course-107',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-107/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-107/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-107/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-107/product.png'
+            }
+          },
+          {
+            courseId: 'course-108',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-108/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-108/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-108/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-108/product.png'
+            }
+          },
+          {
+            courseId: 'course-109',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-109/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-109/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-109/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-109/product.png'
+            }
+          },
+          {
+            courseId: 'course-110',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-110/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-110/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-110/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-110/product.png'
+            }
+          },
+          {
+            courseId: 'course-111',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-111/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-111/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-111/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-111/product.png'
+            }
+          },
+          {
+            courseId: 'course-112',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-112/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-112/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-112/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-112/product.png'
+            }
+          },
+          {
+            courseId: 'course-113',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-113/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-113/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-113/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-113/product.png'
+            }
+          },
+          {
+            courseId: 'course-114',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-114/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-114/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-114/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-114/product.png'
+            }
+          },
+          {
+            courseId: 'course-115',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-115/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-115/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-115/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-115/product.png'
+            }
+          },
+          {
+            courseId: 'course-116',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-116/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-116/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-116/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-116/product.png'
+            }
+          }
+        ],
+        video: [
+          {
+            courseId: 'course-201',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-201/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-201/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-201/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-201/product.png'
+            }
+          },
+          {
+            courseId: 'course-202',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-202/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-202/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-202/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-202/product.png'
+            }
+          },
+          {
+            courseId: 'course-203',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-203/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-203/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-203/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-203/product.png'
+            }
+          },
+          {
+            courseId: 'course-204',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-204/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-204/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-204/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-204/product.png'
+            }
+          },
+          {
+            courseId: 'course-205',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-205/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-205/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-205/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-205/product.png'
+            }
+          },
+          {
+            courseId: 'course-206',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-206/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-206/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-206/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-206/product.png'
+            }
+          },
+          {
+            courseId: 'course-207',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-207/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-207/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-207/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-207/product.png'
+            }
+          },
+          {
+            courseId: 'course-208',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-208/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-208/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-208/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-208/product.png'
+            }
+          },
+          {
+            courseId: 'course-209',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-209/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-209/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-209/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-209/product.png'
+            }
+          },
+          {
+            courseId: 'course-210',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-210/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-210/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-210/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-210/product.png'
+            }
+          },
+          {
+            courseId: 'course-211',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-211/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-211/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-211/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-211/product.png'
+            }
+          },
+          {
+            courseId: 'course-212',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-212/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-212/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-212/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-212/product.png'
+            }
+          },
+          {
+            courseId: 'course-213',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-213/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-213/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-213/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-213/product.png'
+            }
+          },
+          {
+            courseId: 'course-214',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-214/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-214/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-214/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-214/product.png'
+            }
+          },
+          {
+            courseId: 'course-215',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-215/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-215/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-215/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-215/product.png'
+            }
+          },
+          {
+            courseId: 'course-216',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-216/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-216/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-216/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-216/product.png'
+            }
+          },
+          {
+            courseId: 'course-217',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-217/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-217/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-217/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-217/product.png'
+            }
+          }
+        ],
+        baking: [
+          {
+            courseId: 'course-301',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-301/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-301/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-301/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-301/product.png'
+            }
+          },
+          {
+            courseId: 'course-302',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-302/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-302/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-302/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-302/product.png'
+            }
+          },
+          {
+            courseId: 'course-303',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-303/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-303/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-303/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-303/product.png'
+            }
+          },
+          {
+            courseId: 'course-304',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-304/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-304/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-304/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-304/product.png'
+            }
+          },
+          {
+            courseId: 'course-305',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-305/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-305/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-305/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-305/product.png'
+            }
+          },
+          {
+            courseId: 'course-306',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-306/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-306/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-306/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-306/product.png'
+            }
+          },
+          {
+            courseId: 'course-307',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-307/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-307/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-307/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-307/product.png'
+            }
+          },
+          {
+            courseId: 'course-308',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-308/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-308/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-308/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-308/product.png'
+            }
+          },
+          {
+            courseId: 'course-309',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-309/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-309/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-309/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-309/product.png'
+            }
+          },
+          {
+            courseId: 'course-310',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-310/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-310/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-310/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-310/product.png'
+            }
+          },
+          {
+            courseId: 'course-311',
+            variants: {
+              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-311/cover-mobile.png',
+              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-311/cover-pc.png',
+              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-311/list.png',
+              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-311/product.png'
+            }
+          }
+        ]
+      };
+
+      var helperText = document.getElementById('helperText');
+      var imageStatusText = document.getElementById('imageStatusText');
+      var creatorStatusText = document.getElementById('creatorStatusText');
+      var creatorList = document.getElementById('creatorList');
+      var imageMainView = document.getElementById('imageMainView');
+      var imageCreatorView = document.getElementById('imageCreatorView');
+      var openCreatorPageButton = document.getElementById('openCreatorPageButton');
+      var backToImageMainButton = document.getElementById('backToImageMainButton');
+      var randomButton = document.getElementById('randomButton');
+      var tabButtons = Array.prototype.slice.call(document.querySelectorAll('[data-tab]'));
+      var pages = Array.prototype.slice.call(document.querySelectorAll('[data-page]'));
+      var typeButtons = Array.prototype.slice.call(document.querySelectorAll('[data-text-type]'));
+      var imageTypeButtons = Array.prototype.slice.call(document.querySelectorAll('[data-image-type]'));
+      var imageCategoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-image-category]'));
+      var thumbnailCategoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-thumbnail-category]'));
+      var creatorFilterCategoryButtons = Array.prototype.slice.call(
+        document.querySelectorAll('[data-creator-filter-category]')
+      );
+      var categoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-course-category]'));
+
+      function isCourseInfoType(textType) {
+        return (
+          textType === 'creator_name' ||
+          textType === 'job_title' ||
+          textType === 'job_creator' ||
+          textType === 'course_title'
+        );
+      }
+
+      function updateTab(nextTab) {
+        state.activeTab = nextTab;
+
+        for (var i = 0; i < tabButtons.length; i += 1) {
+          var tabButton = tabButtons[i];
+          if (tabButton.getAttribute('data-tab') === nextTab) {
+            tabButton.classList.add('active');
+          } else {
+            tabButton.classList.remove('active');
+          }
+        }
+
+        for (var j = 0; j < pages.length; j += 1) {
+          var page = pages[j];
+          if (page.getAttribute('data-page') === nextTab) {
+            page.classList.add('active');
+          } else {
+            page.classList.remove('active');
+          }
+        }
+
+        updateActionState();
+      }
+
+      function updateTypeSelection(nextType) {
+        state.textType = nextType;
+
+        for (var i = 0; i < typeButtons.length; i += 1) {
+          var button = typeButtons[i];
+          if (button.getAttribute('data-text-type') === nextType) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        updateCategoryState();
+        updateHelperText();
+        updateActionState();
+      }
+
+      function updateCourseCategory(nextCategory) {
+        state.courseCategory = nextCategory;
+
+        for (var i = 0; i < categoryButtons.length; i += 1) {
+          var button = categoryButtons[i];
+          if (button.getAttribute('data-course-category') === nextCategory) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        updateHelperText();
+        updateActionState();
+      }
+
+      function updateImageTypeSelection(nextType) {
+        state.imageType = nextType;
+
+        for (var i = 0; i < imageTypeButtons.length; i += 1) {
+          var button = imageTypeButtons[i];
+          if (button.getAttribute('data-image-type') === nextType) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        updateActionState();
+      }
+
+      function updateImageCategorySelection(nextCategory) {
+        state.imageCategory = nextCategory;
+
+        for (var i = 0; i < imageCategoryButtons.length; i += 1) {
+          var button = imageCategoryButtons[i];
+          if (button.getAttribute('data-image-category') === nextCategory) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        renderCreatorList();
+        updateImageStatusText();
+        updateCreatorStatusText();
+        updateActionState();
+      }
+
+      function updateThumbnailCategorySelection(nextCategory) {
+        state.thumbnailCategory = nextCategory;
+
+        for (var i = 0; i < thumbnailCategoryButtons.length; i += 1) {
+          var button = thumbnailCategoryButtons[i];
+          if (button.getAttribute('data-thumbnail-category') === nextCategory) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        updateImageStatusText();
+        updateActionState();
+      }
+
+      function updateCreatorFilterCategory(nextCategory) {
+        state.creatorFilterCategory = nextCategory;
+
+        for (var i = 0; i < creatorFilterCategoryButtons.length; i += 1) {
+          var button = creatorFilterCategoryButtons[i];
+          if (button.getAttribute('data-creator-filter-category') === nextCategory) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        }
+
+        renderCreatorList();
+        updateCreatorStatusText();
+        updateActionState();
+      }
+
+      function updateImageView(nextView) {
+        state.imageView = nextView;
+
+        if (nextView === 'creator') {
+          imageMainView.classList.remove('active');
+          imageCreatorView.classList.add('active');
+        } else {
+          imageMainView.classList.add('active');
+          imageCreatorView.classList.remove('active');
+        }
+
+        updateImageStatusText();
+        updateCreatorStatusText();
+        updateActionState();
+      }
+
+      function getImageCreatorOptions(category) {
+        if (category === 'all') {
+          return []
+            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.illust)
+            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.video)
+            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.baking);
+        }
+
+        return IMAGE_CREATOR_OPTIONS_BY_CATEGORY[category] || [];
+      }
+
+      function getThumbnailVariantOptions(category, imageType) {
+        var courses = THUMBNAIL_OPTIONS_BY_CATEGORY[category] || [];
+        var options = [];
+
+        for (var i = 0; i < courses.length; i += 1) {
+          var course = courses[i];
+          var imageUrl = course.variants[imageType];
+          if (imageUrl) {
+            options.push({
+              courseId: course.courseId,
+              url: imageUrl
+            });
+          }
+        }
+
+        return options;
+      }
+
+      function getSelectedCreator(category) {
+        return selectedCreatorByCategory[category];
+      }
+
+      function setSelectedCreator(category, creator) {
+        selectedCreatorByCategory[category] = creator;
+        renderCreatorList();
+        updateImageStatusText();
+        updateCreatorStatusText();
+        updateActionState();
+      }
+
+      function renderCreatorList() {
+        creatorList.innerHTML = '';
+
+        var options = getImageCreatorOptions(state.creatorFilterCategory);
+        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
+
+        for (var i = 0; i < options.length; i += 1) {
+          var creator = options[i];
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'creator-item';
+          var check = document.createElement('span');
+          check.className = 'creator-item-check';
+          var label = document.createElement('span');
+          label.className = 'creator-item-label';
+          label.textContent = creator.name;
+          button.appendChild(check);
+          button.appendChild(label);
+
+          if (selectedCreator && selectedCreator.url === creator.url) {
+            button.classList.add('active');
+          }
+
+          button.addEventListener('click', (function (nextCreator) {
+            return function () {
+              setSelectedCreator(state.creatorFilterCategory, nextCreator);
+            };
+          })(creator));
+
+          creatorList.appendChild(button);
+        }
+      }
+
+      function updateImageStatusText() {
+        if (state.imageType !== 'creator') {
+          setImageStatus('썸네일 타입과 baking 카테고리를 선택한 뒤 적용할 수 있어요.');
+          return;
+        }
+
+        var selectedCreator = getSelectedCreator(state.imageCategory);
+
+        if (selectedCreator) {
+          setImageStatus('선택된 크리에이터: ' + selectedCreator.name + '. > 버튼으로 변경할 수 있어요.');
+          return;
+        }
+
+        setImageStatus('카테고리를 선택한 뒤 creator 이미지를 적용할 수 있어요.');
+      }
+
+      function updateCreatorStatusText() {
+        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
+
+        if (selectedCreator) {
+          setCreatorStatus(selectedCreator.name + ' 프로필 이미지를 적용할 준비가 됐어요.');
+          return;
+        }
+
+        setCreatorStatus('적용할 크리에이터를 선택해 주세요.');
+      }
+
+      function updateCategoryState() {
+        var enabled = isCourseInfoType(state.textType);
+
+        for (var i = 0; i < categoryButtons.length; i += 1) {
+          var button = categoryButtons[i];
+          button.disabled = !enabled;
+          if (enabled) {
+            button.classList.remove('disabled');
+          } else {
+            button.classList.add('disabled');
+          }
+        }
+      }
+
+      function updateHelperText() {
+        if (isCourseInfoType(state.textType)) {
+          if (!state.courseCategory) {
+            helperText.textContent = '코스 정보 타입은 Category를 선택한 뒤 적용할 수 있어요.';
+            return;
+          }
+
+          helperText.textContent = '선택한 코스 정보 타입과 카테고리 기준으로 데이터가 적용됩니다.';
+          return;
+        }
+
+        helperText.textContent = '날짜형은 카테고리 선택 없이 오늘부터 3개월 범위 안에서 랜덤 적용돼요.';
+      }
+
+      function updateActionState() {
+        if (state.activeTab === 'image') {
+          if (state.isApplyingImage) {
+            randomButton.disabled = true;
+            randomButton.textContent = '불러오는 중...';
+            return;
+          }
+
+          if (state.imageView === 'creator') {
+            randomButton.disabled = !(state.imageType === 'creator' && !!getSelectedCreator(state.creatorFilterCategory));
+            randomButton.textContent = '적용';
+            return;
+          }
+
+          if (state.imageType === 'creator') {
+            randomButton.disabled = getImageCreatorOptions(state.imageCategory).length === 0;
+            randomButton.textContent = '적용';
+            return;
+          }
+
+          randomButton.disabled = getThumbnailVariantOptions(state.thumbnailCategory, state.imageType).length === 0;
+          randomButton.textContent = '적용';
+          return;
+        }
+
+        randomButton.disabled = false;
+        randomButton.textContent = '적용';
+      }
+
+      function postApplyMessage(type) {
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: type,
+              textType: state.textType,
+              courseCategory: isCourseInfoType(state.textType) ? state.courseCategory : null
+            }
+          },
+          '*'
+        );
+      }
+
+      function setImageStatus(message) {
+        if (imageStatusText) {
+          imageStatusText.textContent = message;
+        }
+        console.log('[ImageStatus]', message);
+      }
+
+      function setCreatorStatus(message) {
+        if (creatorStatusText) {
+          creatorStatusText.textContent = message;
+        }
+        console.log('[CreatorStatus]', message);
+      }
+
+      async function loadImageAsset(imageUrl) {
+        var response = await fetch(imageUrl);
+
+        if (!response.ok) {
+          throw new Error('이미지 응답 오류: ' + imageUrl + ' / status ' + String(response.status));
+        }
+
+        var contentType = response.headers.get('content-type') || '';
+        if (
+          contentType.indexOf('image/png') === -1 &&
+          contentType.indexOf('image/jpeg') === -1 &&
+          contentType.indexOf('image/gif') === -1
+        ) {
+          throw new Error('지원되지 않는 이미지 타입: ' + imageUrl + ' / ' + contentType);
+        }
+
+        var arrayBuffer = await response.arrayBuffer();
+        return {
+          url: imageUrl,
+          bytes: new Uint8Array(arrayBuffer)
+        };
+      }
+
+      async function postImageApplyMessage(requestId) {
+        var sourceCategory = state.imageView === 'creator' ? state.creatorFilterCategory : state.imageCategory;
+        var creatorOptions = getImageCreatorOptions(sourceCategory);
+        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
+        var targetOptions = [];
+        var messageCategory = sourceCategory;
+
+        if (state.imageType === 'creator') {
+          if (creatorOptions.length === 0) {
+            return;
+          }
+          targetOptions = state.imageView === 'creator' && selectedCreator ? [selectedCreator] : creatorOptions;
+        } else {
+          messageCategory = state.thumbnailCategory;
+          targetOptions = getThumbnailVariantOptions(state.thumbnailCategory, state.imageType);
+          if (targetOptions.length === 0) {
+            return;
+          }
+        }
+
+        try {
+          setImageStatus('이미지 적용 버튼 클릭됨. 이미지를 준비하는 중이에요...');
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'image-apply-start',
+                requestId: requestId
+              }
+            },
+            '*'
+          );
+
+          var imageAssets = [];
+
+          for (var i = 0; i < targetOptions.length; i += 1) {
+            setImageStatus('이미지 데이터 준비 중... ' + String(i + 1) + '/' + String(targetOptions.length));
+            imageAssets.push(await loadImageAsset(targetOptions[i].url));
+          }
+
+          setImageStatus(String(imageAssets.length) + '개 이미지 준비 완료. 플러그인에 적용 요청을 보내는 중이에요...');
+
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'apply-image-random',
+                requestId: requestId,
+                imageType: state.imageType,
+                imageCategory: messageCategory,
+                imageAssets: imageAssets
+              }
+            },
+            '*'
+          );
+
+          setImageStatus('적용 요청을 보냈어요. 결과 토스트를 확인해 주세요.');
+        } catch (error) {
+          var errorMessage = error && error.message ? error.message : 'Failed to fetch';
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'image-apply-prep-error',
+                requestId: requestId,
+                message: errorMessage
+              }
+            },
+            '*'
+          );
+          setImageStatus('이미지 준비 단계 오류: ' + errorMessage);
+        }
+      }
+
+      window.onmessage = function (event) {
+        var pluginMessage = event.data && event.data.pluginMessage;
+        if (!pluginMessage) {
+          return;
+        }
+
+        if (pluginMessage.type !== 'image-apply-state') {
+          return;
+        }
+
+        if (pluginMessage.requestId !== state.imageApplyRequestId) {
+          return;
+        }
+
+        state.isApplyingImage = false;
+        updateActionState();
+      };
+
+      for (var i = 0; i < tabButtons.length; i += 1) {
+        tabButtons[i].addEventListener('click', function (event) {
+          updateTab(event.currentTarget.getAttribute('data-tab'));
+        });
+      }
+
+      for (var j = 0; j < typeButtons.length; j += 1) {
+        typeButtons[j].addEventListener('click', function (event) {
+          updateTypeSelection(event.currentTarget.getAttribute('data-text-type'));
+        });
+      }
+
+      for (var m = 0; m < imageTypeButtons.length; m += 1) {
+        imageTypeButtons[m].addEventListener('click', function (event) {
+          updateImageTypeSelection(event.currentTarget.getAttribute('data-image-type'));
+        });
+      }
+
+      for (var n = 0; n < imageCategoryButtons.length; n += 1) {
+        imageCategoryButtons[n].addEventListener('click', function (event) {
+          updateImageCategorySelection(event.currentTarget.getAttribute('data-image-category'));
+        });
+      }
+
+      for (var o = 0; o < thumbnailCategoryButtons.length; o += 1) {
+        thumbnailCategoryButtons[o].addEventListener('click', function (event) {
+          updateThumbnailCategorySelection(event.currentTarget.getAttribute('data-thumbnail-category'));
+        });
+      }
+
+      for (var p = 0; p < creatorFilterCategoryButtons.length; p += 1) {
+        creatorFilterCategoryButtons[p].addEventListener('click', function (event) {
+          updateCreatorFilterCategory(event.currentTarget.getAttribute('data-creator-filter-category'));
+        });
+      }
+
+      openCreatorPageButton.addEventListener('click', function () {
+        renderCreatorList();
+        updateImageView('creator');
+      });
+
+      backToImageMainButton.addEventListener('click', function () {
+        updateImageView('main');
+      });
+
+      for (var k = 0; k < categoryButtons.length; k += 1) {
+        categoryButtons[k].addEventListener('click', function (event) {
+          if (event.currentTarget.disabled) {
+            return;
+          }
+
+          updateCourseCategory(event.currentTarget.getAttribute('data-course-category'));
+        });
+      }
+
+      randomButton.addEventListener('click', function () {
+        if (randomButton.disabled) {
+          return;
+        }
+
+        if (state.activeTab === 'image') {
+          state.imageApplyRequestId += 1;
+          var requestId = state.imageApplyRequestId;
+          state.isApplyingImage = true;
+          updateActionState();
+
+          postImageApplyMessage(requestId).catch(function (error) {
+            if (requestId !== state.imageApplyRequestId) {
+              return;
+            }
+
+            state.isApplyingImage = false;
+            updateActionState();
+            console.error(error);
+            var errorMessage = error && error.message ? error.message : '알 수 없는 오류';
+            setImageStatus('이미지 준비 단계 오류: ' + errorMessage);
+          });
+          return;
+        }
+
+        postApplyMessage('apply-random');
+      });
+
+      updateTypeSelection('creator_name');
+      updateImageTypeSelection('creator');
+      updateImageCategorySelection('baking');
+      updateThumbnailCategorySelection('baking');
+      updateCreatorFilterCategory('all');
+      renderCreatorList();
+      updateImageView('main');
+      updateTab('image');
+    </script>
+  </body>
+</html>
