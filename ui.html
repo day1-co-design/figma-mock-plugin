@@ -499,6 +499,22 @@
         imageApplyRequestId: 0
       };
 
+      var TEXT_TYPE_LABELS = {
+        creator_name: '연사명',
+        job_title: '직업명',
+        job_creator: '직업명 + 연사명',
+        course_title: '코스 타이틀',
+        date_yyyy: '날짜형 YYYY.MM.DD',
+        date_yy: '날짜형 YY.MM.DD'
+      };
+      var TEXT_DATA_SOURCE_URLS = [
+        'https://day1-co-design.github.io/figma-mock-plugin/data/text-course-info.json',
+        'http://localhost:8001/data/text-course-info.json'
+      ];
+      var courseInfoData = null;
+      var textDataLoadState = 'loading';
+      var textDataLoadPromise = null;
+
       var IMAGE_BASE_ROOT = 'http://localhost:8001/assets/images/profile/';
       var IMAGE_CREATOR_OPTIONS_BY_CATEGORY = {
         baking: [
@@ -1253,6 +1269,16 @@
 
       function updateHelperText() {
         if (isCourseInfoType(state.textType)) {
+          if (textDataLoadState === 'loading') {
+            helperText.textContent = '텍스트 데이터를 불러오는 중이에요.';
+            return;
+          }
+
+          if (textDataLoadState === 'error') {
+            helperText.textContent = '텍스트 데이터를 불러오지 못했어요. GitHub Pages 또는 로컬 서버를 확인해 주세요.';
+            return;
+          }
+
           if (!state.courseCategory) {
             helperText.textContent = '코스 정보 타입은 Category를 선택한 뒤 적용할 수 있어요.';
             return;
@@ -1290,17 +1316,202 @@
           return;
         }
 
+        if (isCourseInfoType(state.textType)) {
+          if (textDataLoadState === 'loading') {
+            randomButton.disabled = true;
+            randomButton.textContent = '불러오는 중...';
+            return;
+          }
+
+          if (textDataLoadState === 'error') {
+            randomButton.disabled = true;
+            randomButton.textContent = '적용';
+            return;
+          }
+
+          randomButton.disabled = !state.courseCategory;
+          randomButton.textContent = '적용';
+          return;
+        }
+
         randomButton.disabled = false;
         randomButton.textContent = '적용';
       }
 
-      function postApplyMessage(type) {
+      async function ensureCourseInfoData() {
+        if (courseInfoData) {
+          return courseInfoData;
+        }
+
+        if (textDataLoadPromise) {
+          return textDataLoadPromise;
+        }
+
+        textDataLoadState = 'loading';
+        updateHelperText();
+        updateActionState();
+
+        textDataLoadPromise = (async function () {
+          var lastError = null;
+
+          for (var i = 0; i < TEXT_DATA_SOURCE_URLS.length; i += 1) {
+            var sourceUrl = TEXT_DATA_SOURCE_URLS[i];
+
+            try {
+              var response = await fetch(sourceUrl);
+              if (!response.ok) {
+                throw new Error('status ' + String(response.status));
+              }
+
+              var json = await response.json();
+              courseInfoData = json;
+              textDataLoadState = 'ready';
+              updateHelperText();
+              updateActionState();
+              console.log('[TextData] loaded from', sourceUrl);
+              return courseInfoData;
+            } catch (error) {
+              lastError = error;
+              console.warn('[TextData] failed to load from', sourceUrl, error);
+            }
+          }
+
+          textDataLoadState = 'error';
+          textDataLoadPromise = null;
+          updateHelperText();
+          updateActionState();
+          throw lastError || new Error('텍스트 데이터를 불러오지 못했어요.');
+        })();
+
+        return textDataLoadPromise;
+      }
+
+      function getCourseInfoRows(courseCategory) {
+        if (!courseInfoData || !courseCategory) {
+          return [];
+        }
+
+        return courseInfoData[courseCategory] || [];
+      }
+
+      function createDateRangeValues(textType) {
+        var startDate = getTodayDate();
+        var endDate = new Date(startDate.getTime());
+        endDate.setMonth(endDate.getMonth() + 3);
+
+        var dates = [];
+        var currentDate = new Date(startDate.getTime());
+
+        while (currentDate.getTime() <= endDate.getTime()) {
+          dates.push(formatDate(currentDate, textType));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return dates;
+      }
+
+      function getTodayDate() {
+        var now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0);
+      }
+
+      function formatDate(date, textType) {
+        var year = date.getFullYear();
+        var shortYear = String(year).slice(-2);
+        var month = padNumber(date.getMonth() + 1);
+        var day = padNumber(date.getDate());
+
+        if (textType === 'date_yy') {
+          return shortYear + '.' + month + '.' + day;
+        }
+
+        return String(year) + '.' + month + '.' + day;
+      }
+
+      function padNumber(value) {
+        if (value < 10) {
+          return '0' + String(value);
+        }
+
+        return String(value);
+      }
+
+      function getTextValuesForApply() {
+        if (state.textType === 'date_yyyy' || state.textType === 'date_yy') {
+          return createDateRangeValues(state.textType);
+        }
+
+        if (!state.courseCategory) {
+          return null;
+        }
+
+        var rows = getCourseInfoRows(state.courseCategory);
+
+        if (state.textType === 'creator_name') {
+          return rows.map(function (item) {
+            return item.creator_name;
+          });
+        }
+
+        if (state.textType === 'job_title') {
+          return rows.map(function (item) {
+            return item.job_title;
+          });
+        }
+
+        if (state.textType === 'job_creator') {
+          return rows.map(function (item) {
+            return item.job_title + ' ' + item.creator_name;
+          });
+        }
+
+        return rows
+          .map(function (item) {
+            return item.course_title || '';
+          })
+          .filter(function (value) {
+            return value.length > 0;
+          });
+      }
+
+      async function postApplyMessage() {
+        if (isCourseInfoType(state.textType)) {
+          try {
+            await ensureCourseInfoData();
+          } catch (error) {
+            parent.postMessage(
+              {
+                pluginMessage: {
+                  type: 'show-toast',
+                  message: '텍스트 데이터를 불러오지 못했어요.'
+                }
+              },
+              '*'
+            );
+            return;
+          }
+        }
+
+        var values = getTextValuesForApply();
+        if (!values || values.length === 0) {
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'show-toast',
+                message: '선택한 데이터 유형에 사용할 값이 없어요.'
+              }
+            },
+            '*'
+          );
+          return;
+        }
+
         parent.postMessage(
           {
             pluginMessage: {
-              type: type,
-              textType: state.textType,
-              courseCategory: isCourseInfoType(state.textType) ? state.courseCategory : null
+              type: 'apply-random',
+              values: values,
+              successLabel: TEXT_TYPE_LABELS[state.textType]
             }
           },
           '*'
@@ -1513,7 +1724,22 @@
           return;
         }
 
-        postApplyMessage('apply-random');
+        postApplyMessage().catch(function (error) {
+          console.error(error);
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'show-toast',
+                message: '텍스트 데이터를 불러오지 못했어요.'
+              }
+            },
+            '*'
+          );
+        });
+      });
+
+      ensureCourseInfoData().catch(function (error) {
+        console.warn('[TextData] initial load failed', error);
       });
 
       updateTypeSelection('creator_name');
