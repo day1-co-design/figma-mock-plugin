@@ -515,476 +515,22 @@
       var textDataLoadState = 'loading';
       var textDataLoadPromise = null;
 
-      var IMAGE_BASE_ROOT = 'http://localhost:8001/assets/images/profile/';
-      var IMAGE_CREATOR_OPTIONS_BY_CATEGORY = {
-        baking: [
-          { name: '바통', url: IMAGE_BASE_ROOT + 'baking/baton.png' },
-          { name: '최은영', url: IMAGE_BASE_ROOT + 'baking/choi-eunyoung.png' },
-          { name: '최지혜', url: IMAGE_BASE_ROOT + 'baking/choi-jihye.png' },
-          { name: '최유정', url: IMAGE_BASE_ROOT + 'baking/choi-yujeong.png' },
-          { name: '고나훈', url: IMAGE_BASE_ROOT + 'baking/go-nahoon.png' },
-          { name: '홍상기', url: IMAGE_BASE_ROOT + 'baking/hong-sanggi.png' },
-          { name: '장효비', url: IMAGE_BASE_ROOT + 'baking/jang-hyobi.png' },
-          { name: '김다나', url: IMAGE_BASE_ROOT + 'baking/kim-dana.png' },
-          { name: '김지현', url: IMAGE_BASE_ROOT + 'baking/kim-jihyeon.png' },
-          { name: '이지민', url: IMAGE_BASE_ROOT + 'baking/lee-jimin.png' },
-          { name: '이준희', url: IMAGE_BASE_ROOT + 'baking/lee-junhee.png' },
-          { name: '박혜령', url: IMAGE_BASE_ROOT + 'baking/park-hyeryeong.png' },
-          { name: '박웅종', url: IMAGE_BASE_ROOT + 'baking/park-ungjong.png' },
-          { name: '신민경', url: IMAGE_BASE_ROOT + 'baking/shin-mingyeong.png' },
-          { name: '제로', url: IMAGE_BASE_ROOT + 'baking/zero.png' }
-        ],
-        video: [
-          { name: '채디', url: IMAGE_BASE_ROOT + 'Video/chedy.png' },
-          { name: '감자만세', url: IMAGE_BASE_ROOT + 'Video/gamja.png' },
-          { name: '장혜진', url: IMAGE_BASE_ROOT + 'Video/janghyejin.png' },
-          { name: '김지수', url: IMAGE_BASE_ROOT + 'Video/kimjisoo.png' },
-          { name: '김승철', url: IMAGE_BASE_ROOT + 'Video/kimseungcheol.png' },
-          { name: '키무네', url: IMAGE_BASE_ROOT + 'Video/kimune.png' },
-          { name: '이동영', url: IMAGE_BASE_ROOT + 'Video/leedongyoung.png' },
-          { name: '이재연', url: IMAGE_BASE_ROOT + 'Video/leejaeyeoun.png' },
-          { name: 'Lorde', url: IMAGE_BASE_ROOT + 'Video/lorde.png' },
-          { name: 'MANZA', url: IMAGE_BASE_ROOT + 'Video/manza.png' },
-          { name: 'Owen Kim', url: IMAGE_BASE_ROOT + 'Video/owenkim.png' },
-          { name: '파닭', url: IMAGE_BASE_ROOT + 'Video/padalg.png' },
-          { name: '조약돌', url: IMAGE_BASE_ROOT + 'Video/pebble.png' },
-          { name: '신승섭', url: IMAGE_BASE_ROOT + 'Video/shinsuengsub.png' },
-          { name: '윤성원', url: IMAGE_BASE_ROOT + 'Video/yoonseongwon.png' },
-          { name: 'Yorsh', url: IMAGE_BASE_ROOT + 'Video/yorsh.png' },
-          { name: '유은', url: IMAGE_BASE_ROOT + 'Video/yueun.png' }
-        ],
-        illust: [
-          { name: '초연', url: IMAGE_BASE_ROOT + 'illustration/choyeon.png' },
-          { name: '띵구', url: IMAGE_BASE_ROOT + 'illustration/ddingu.png' },
-          { name: '홍작가', url: IMAGE_BASE_ROOT + 'illustration/hongjacga.png' },
-          { name: '케토', url: IMAGE_BASE_ROOT + 'illustration/keto.png' },
-          { name: 'Kiru', url: IMAGE_BASE_ROOT + 'illustration/kiru.png' },
-          { name: 'M1Z', url: IMAGE_BASE_ROOT + 'illustration/m1z.png' },
-          { name: 'Mark.J', url: IMAGE_BASE_ROOT + 'illustration/markj.png' },
-          { name: 'Okku', url: IMAGE_BASE_ROOT + 'illustration/okku.png' },
-          { name: '시와', url: IMAGE_BASE_ROOT + 'illustration/siwaa.png' },
-          { name: 'Smiley Jo', url: IMAGE_BASE_ROOT + 'illustration/smiley-jo.png' },
-          { name: '소금이', url: IMAGE_BASE_ROOT + 'illustration/sogumi.png' },
-          { name: '소융', url: IMAGE_BASE_ROOT + 'illustration/soyoong.png' },
-          { name: '샤가무', url: IMAGE_BASE_ROOT + 'illustration/syagamu.png' },
-          { name: '웅돼지', url: IMAGE_BASE_ROOT + 'illustration/uoongpig.png' },
-          { name: '용사', url: IMAGE_BASE_ROOT + 'illustration/yongsa.png' },
-          { name: '영모', url: IMAGE_BASE_ROOT + 'illustration/youngmo.png' }
-        ]
-      };
+      var IMAGE_DATA_SOURCE_URLS = [
+        'https://day1-co-design.github.io/figma-mock-plugin/data/image-assets.json',
+        'http://localhost:8001/data/image-assets.json'
+      ];
+      var imageData = null;
+      var imageDataLoadState = 'loading';
+      var imageDataLoadPromise = null;
       var selectedCreatorByCategory = {
         all: null,
         baking: null,
         video: null,
         illust: null
       };
-      var THUMBNAIL_BASE_ROOT = 'http://localhost:8001/assets/images/thumbnail/';
-      var THUMBNAIL_OPTIONS_BY_CATEGORY = {
-        illust: [
-          {
-            courseId: 'course-101',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-101/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-101/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-101/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-101/product.png'
-            }
-          },
-          {
-            courseId: 'course-102',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-102/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-102/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-102/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-102/product.png'
-            }
-          },
-          {
-            courseId: 'course-103',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-103/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-103/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-103/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-103/product.png'
-            }
-          },
-          {
-            courseId: 'course-104',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-104/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-104/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-104/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-104/product.png'
-            }
-          },
-          {
-            courseId: 'course-105',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-105/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-105/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-105/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-105/product.png'
-            }
-          },
-          {
-            courseId: 'course-106',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-106/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-106/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-106/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-106/product.png'
-            }
-          },
-          {
-            courseId: 'course-107',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-107/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-107/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-107/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-107/product.png'
-            }
-          },
-          {
-            courseId: 'course-108',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-108/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-108/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-108/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-108/product.png'
-            }
-          },
-          {
-            courseId: 'course-109',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-109/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-109/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-109/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-109/product.png'
-            }
-          },
-          {
-            courseId: 'course-110',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-110/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-110/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-110/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-110/product.png'
-            }
-          },
-          {
-            courseId: 'course-111',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-111/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-111/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-111/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-111/product.png'
-            }
-          },
-          {
-            courseId: 'course-112',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-112/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-112/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-112/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-112/product.png'
-            }
-          },
-          {
-            courseId: 'course-113',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-113/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-113/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-113/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-113/product.png'
-            }
-          },
-          {
-            courseId: 'course-114',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-114/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-114/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-114/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-114/product.png'
-            }
-          },
-          {
-            courseId: 'course-115',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-115/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-115/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-115/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-115/product.png'
-            }
-          },
-          {
-            courseId: 'course-116',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'illustration/course-116/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'illustration/course-116/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'illustration/course-116/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'illustration/course-116/product.png'
-            }
-          }
-        ],
-        video: [
-          {
-            courseId: 'course-201',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-201/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-201/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-201/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-201/product.png'
-            }
-          },
-          {
-            courseId: 'course-202',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-202/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-202/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-202/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-202/product.png'
-            }
-          },
-          {
-            courseId: 'course-203',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-203/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-203/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-203/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-203/product.png'
-            }
-          },
-          {
-            courseId: 'course-204',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-204/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-204/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-204/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-204/product.png'
-            }
-          },
-          {
-            courseId: 'course-205',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-205/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-205/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-205/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-205/product.png'
-            }
-          },
-          {
-            courseId: 'course-206',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-206/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-206/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-206/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-206/product.png'
-            }
-          },
-          {
-            courseId: 'course-207',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-207/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-207/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-207/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-207/product.png'
-            }
-          },
-          {
-            courseId: 'course-208',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-208/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-208/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-208/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-208/product.png'
-            }
-          },
-          {
-            courseId: 'course-209',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-209/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-209/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-209/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-209/product.png'
-            }
-          },
-          {
-            courseId: 'course-210',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-210/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-210/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-210/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-210/product.png'
-            }
-          },
-          {
-            courseId: 'course-211',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-211/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-211/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-211/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-211/product.png'
-            }
-          },
-          {
-            courseId: 'course-212',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-212/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-212/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-212/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-212/product.png'
-            }
-          },
-          {
-            courseId: 'course-213',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-213/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-213/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-213/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-213/product.png'
-            }
-          },
-          {
-            courseId: 'course-214',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-214/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-214/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-214/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-214/product.png'
-            }
-          },
-          {
-            courseId: 'course-215',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-215/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-215/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-215/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-215/product.png'
-            }
-          },
-          {
-            courseId: 'course-216',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-216/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-216/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-216/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-216/product.png'
-            }
-          },
-          {
-            courseId: 'course-217',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'video/course-217/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'video/course-217/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'video/course-217/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'video/course-217/product.png'
-            }
-          }
-        ],
-        baking: [
-          {
-            courseId: 'course-301',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-301/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-301/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-301/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-301/product.png'
-            }
-          },
-          {
-            courseId: 'course-302',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-302/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-302/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-302/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-302/product.png'
-            }
-          },
-          {
-            courseId: 'course-303',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-303/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-303/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-303/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-303/product.png'
-            }
-          },
-          {
-            courseId: 'course-304',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-304/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-304/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-304/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-304/product.png'
-            }
-          },
-          {
-            courseId: 'course-305',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-305/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-305/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-305/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-305/product.png'
-            }
-          },
-          {
-            courseId: 'course-306',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-306/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-306/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-306/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-306/product.png'
-            }
-          },
-          {
-            courseId: 'course-307',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-307/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-307/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-307/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-307/product.png'
-            }
-          },
-          {
-            courseId: 'course-308',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-308/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-308/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-308/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-308/product.png'
-            }
-          },
-          {
-            courseId: 'course-309',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-309/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-309/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-309/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-309/product.png'
-            }
-          },
-          {
-            courseId: 'course-310',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-310/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-310/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-310/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-310/product.png'
-            }
-          },
-          {
-            courseId: 'course-311',
-            variants: {
-              thumbnail_cover_mobile: THUMBNAIL_BASE_ROOT + 'baking/course-311/cover-mobile.png',
-              thumbnail_cover_pc: THUMBNAIL_BASE_ROOT + 'baking/course-311/cover-pc.png',
-              thumbnail_list: THUMBNAIL_BASE_ROOT + 'baking/course-311/list.png',
-              thumbnail_product: THUMBNAIL_BASE_ROOT + 'baking/course-311/product.png'
-            }
-          }
-        ]
-      };
 
       var helperText = document.getElementById('helperText');
+
       var imageStatusText = document.getElementById('imageStatusText');
       var creatorStatusText = document.getElementById('creatorStatusText');
       var creatorList = document.getElementById('creatorList');
@@ -1152,19 +698,80 @@
         updateActionState();
       }
 
-      function getImageCreatorOptions(category) {
-        if (category === 'all') {
-          return []
-            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.illust)
-            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.video)
-            .concat(IMAGE_CREATOR_OPTIONS_BY_CATEGORY.baking);
+      async function ensureImageData() {
+        if (imageData) {
+          return imageData;
         }
 
-        return IMAGE_CREATOR_OPTIONS_BY_CATEGORY[category] || [];
+        if (imageDataLoadPromise) {
+          return imageDataLoadPromise;
+        }
+
+        imageDataLoadState = 'loading';
+        updateImageStatusText();
+        updateCreatorStatusText();
+        updateActionState();
+
+        imageDataLoadPromise = (async function () {
+          var lastError = null;
+
+          for (var i = 0; i < IMAGE_DATA_SOURCE_URLS.length; i += 1) {
+            var sourceUrl = IMAGE_DATA_SOURCE_URLS[i];
+
+            try {
+              var response = await fetch(sourceUrl);
+              if (!response.ok) {
+                throw new Error('status ' + String(response.status));
+              }
+
+              var json = await response.json();
+              imageData = json;
+              imageDataLoadState = 'ready';
+              updateImageStatusText();
+              updateCreatorStatusText();
+              updateActionState();
+              renderCreatorList();
+              console.log('[ImageData] loaded from', sourceUrl);
+              return imageData;
+            } catch (error) {
+              lastError = error;
+              console.warn('[ImageData] failed to load from', sourceUrl, error);
+            }
+          }
+
+          imageDataLoadState = 'error';
+          imageDataLoadPromise = null;
+          updateImageStatusText();
+          updateCreatorStatusText();
+          updateActionState();
+          renderCreatorList();
+          throw lastError || new Error('이미지 데이터를 불러오지 못했어요.');
+        })();
+
+        return imageDataLoadPromise;
+      }
+
+      function getImageCreatorOptions(category) {
+        if (!imageData || !imageData.profile) {
+          return [];
+        }
+
+        if (category === 'all') {
+          return []
+            .concat(imageData.profile.illust || [])
+            .concat(imageData.profile.video || [])
+            .concat(imageData.profile.baking || []);
+        }
+
+        return imageData.profile[category] || [];
       }
 
       function getThumbnailVariantOptions(category, imageType) {
-        var courses = THUMBNAIL_OPTIONS_BY_CATEGORY[category] || [];
+        if (!imageData || !imageData.thumbnail) {
+          return [];
+        }
+
+        var courses = imageData.thumbnail[category] || [];
         var options = [];
 
         for (var i = 0; i < courses.length; i += 1) {
@@ -1182,6 +789,7 @@
       }
 
       function getSelectedCreator(category) {
+
         return selectedCreatorByCategory[category];
       }
 
@@ -1227,8 +835,18 @@
       }
 
       function updateImageStatusText() {
+        if (imageDataLoadState === 'loading') {
+          setImageStatus('이미지 데이터를 불러오는 중이에요.');
+          return;
+        }
+
+        if (imageDataLoadState === 'error') {
+          setImageStatus('이미지 데이터를 불러오지 못했어요. GitHub Pages 또는 로컬 서버를 확인해 주세요.');
+          return;
+        }
+
         if (state.imageType !== 'creator') {
-          setImageStatus('썸네일 타입과 baking 카테고리를 선택한 뒤 적용할 수 있어요.');
+          setImageStatus('썸네일 타입과 카테고리를 선택한 뒤 적용할 수 있어요.');
           return;
         }
 
@@ -1243,6 +861,16 @@
       }
 
       function updateCreatorStatusText() {
+        if (imageDataLoadState === 'loading') {
+          setCreatorStatus('크리에이터 이미지를 불러오는 중이에요.');
+          return;
+        }
+
+        if (imageDataLoadState === 'error') {
+          setCreatorStatus('크리에이터 이미지를 불러오지 못했어요.');
+          return;
+        }
+
         var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
 
         if (selectedCreator) {
@@ -1296,6 +924,18 @@
           if (state.isApplyingImage) {
             randomButton.disabled = true;
             randomButton.textContent = '불러오는 중...';
+            return;
+          }
+
+          if (imageDataLoadState === 'loading') {
+            randomButton.disabled = true;
+            randomButton.textContent = '불러오는 중...';
+            return;
+          }
+
+          if (imageDataLoadState === 'error') {
+            randomButton.disabled = true;
+            randomButton.textContent = '적용';
             return;
           }
 
@@ -1556,6 +1196,8 @@
       }
 
       async function postImageApplyMessage(requestId) {
+        await ensureImageData();
+
         var sourceCategory = state.imageView === 'creator' ? state.creatorFilterCategory : state.imageCategory;
         var creatorOptions = getImageCreatorOptions(sourceCategory);
         var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
@@ -1740,6 +1382,9 @@
 
       ensureCourseInfoData().catch(function (error) {
         console.warn('[TextData] initial load failed', error);
+      });
+      ensureImageData().catch(function (error) {
+        console.warn('[ImageData] initial load failed', error);
       });
 
       updateTypeSelection('creator_name');

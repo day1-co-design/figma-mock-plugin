@@ -1,0 +1,690 @@
+{
+  "profile": {
+    "baking": [
+      {
+        "courseId": "course-312",
+        "name": "바통",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/baton.png"
+      },
+      {
+        "courseId": "course-306",
+        "name": "최은영",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/choi-eunyoung.png"
+      },
+      {
+        "courseId": "course-302",
+        "name": "최지혜",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/choi-jihye.png"
+      },
+      {
+        "courseId": "course-301",
+        "name": "최유정",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/choi-yujeong.png"
+      },
+      {
+        "courseId": "course-305",
+        "name": "고나훈",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/go-nahoon.png"
+      },
+      {
+        "courseId": "course-309",
+        "name": "홍상기",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/hong-sanggi.png"
+      },
+      {
+        "courseId": "course-303",
+        "name": "장효비",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/jang-hyobi.png"
+      },
+      {
+        "courseId": "course-311",
+        "name": "김다나",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/kim-dana.png"
+      },
+      {
+        "courseId": "course-315",
+        "name": "김지현",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/kim-jihyeon.png"
+      },
+      {
+        "courseId": "course-314",
+        "name": "이지민",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/lee-jimin.png"
+      },
+      {
+        "courseId": "course-308",
+        "name": "이준희",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/lee-junhee.png"
+      },
+      {
+        "courseId": "course-310",
+        "name": "박혜령",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/park-hyeryeong.png"
+      },
+      {
+        "courseId": "course-313",
+        "name": "박웅종",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/park-ungjong.png"
+      },
+      {
+        "courseId": "course-307",
+        "name": "신민경",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/shin-mingyeong.png"
+      },
+      {
+        "courseId": "course-304",
+        "name": "제로",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/baking/zero.png"
+      }
+    ],
+    "video": [
+      {
+        "courseId": "course-203",
+        "name": "채디",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/chedy.png"
+      },
+      {
+        "courseId": "course-217",
+        "name": "감자만세",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/gamja.png"
+      },
+      {
+        "courseId": "course-213",
+        "name": "장혜진",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/janghyejin.png"
+      },
+      {
+        "courseId": "course-207",
+        "name": "김지수",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/kimjisoo.png"
+      },
+      {
+        "courseId": "course-202",
+        "name": "김승철",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/kimseungcheol.png"
+      },
+      {
+        "courseId": "course-201",
+        "name": "키무네",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/kimune.png"
+      },
+      {
+        "courseId": "course-214",
+        "name": "이동영",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/leedongyoung.png"
+      },
+      {
+        "courseId": "course-208",
+        "name": "이재연",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/leejaeyeoun.png"
+      },
+      {
+        "courseId": "course-215",
+        "name": "Lorde",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/lorde.png"
+      },
+      {
+        "courseId": "course-206",
+        "name": "MANZA",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/manza.png"
+      },
+      {
+        "courseId": "course-209",
+        "name": "Owen Kim",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/owenkim.png"
+      },
+      {
+        "courseId": "course-211",
+        "name": "파닭",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/padalg.png"
+      },
+      {
+        "courseId": "course-212",
+        "name": "조약돌",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/pebble.png"
+      },
+      {
+        "courseId": "course-205",
+        "name": "신승섭",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/shinsuengsub.png"
+      },
+      {
+        "courseId": "course-216",
+        "name": "윤성원",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/yoonseongwon.png"
+      },
+      {
+        "courseId": "course-204",
+        "name": "Yorsh",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/yorsh.png"
+      },
+      {
+        "courseId": "course-210",
+        "name": "유은",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/Video/yueun.png"
+      }
+    ],
+    "illust": [
+      {
+        "courseId": "course-104",
+        "name": "초연",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/choyeon.png"
+      },
+      {
+        "courseId": "course-110",
+        "name": "띵구",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/ddingu.png"
+      },
+      {
+        "courseId": "course-112",
+        "name": "홍작가",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/hongjacga.png"
+      },
+      {
+        "courseId": "course-115",
+        "name": "케토",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/keto.png"
+      },
+      {
+        "courseId": "course-108",
+        "name": "Kiru",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/kiru.png"
+      },
+      {
+        "courseId": "course-105",
+        "name": "M1Z",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/m1z.png"
+      },
+      {
+        "courseId": "course-103",
+        "name": "Mark.J",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/markj.png"
+      },
+      {
+        "courseId": "course-114",
+        "name": "Okku",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/okku.png"
+      },
+      {
+        "courseId": "course-107",
+        "name": "시와",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/siwaa.png"
+      },
+      {
+        "courseId": "course-109",
+        "name": "Smiley Jo",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/smiley-jo.png"
+      },
+      {
+        "courseId": "course-106",
+        "name": "소금이",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/sogumi.png"
+      },
+      {
+        "courseId": "course-116",
+        "name": "소융",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/soyoong.png"
+      },
+      {
+        "courseId": "course-102",
+        "name": "샤가무",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/syagamu.png"
+      },
+      {
+        "courseId": "course-101",
+        "name": "웅돼지",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/uoongpig.png"
+      },
+      {
+        "courseId": "course-111",
+        "name": "용사",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/yongsa.png"
+      },
+      {
+        "courseId": "course-113",
+        "name": "영모",
+        "url": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/profile/illustration/youngmo.png"
+      }
+    ]
+  },
+  "thumbnail": {
+    "illust": [
+      {
+        "courseId": "course-101",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-101/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-101/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-101/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-101/product.png"
+        }
+      },
+      {
+        "courseId": "course-102",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-102/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-102/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-102/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-102/product.png"
+        }
+      },
+      {
+        "courseId": "course-103",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-103/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-103/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-103/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-103/product.png"
+        }
+      },
+      {
+        "courseId": "course-104",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-104/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-104/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-104/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-104/product.png"
+        }
+      },
+      {
+        "courseId": "course-105",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-105/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-105/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-105/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-105/product.png"
+        }
+      },
+      {
+        "courseId": "course-106",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-106/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-106/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-106/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-106/product.png"
+        }
+      },
+      {
+        "courseId": "course-107",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-107/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-107/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-107/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-107/product.png"
+        }
+      },
+      {
+        "courseId": "course-108",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-108/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-108/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-108/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-108/product.png"
+        }
+      },
+      {
+        "courseId": "course-109",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-109/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-109/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-109/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-109/product.png"
+        }
+      },
+      {
+        "courseId": "course-110",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-110/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-110/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-110/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-110/product.png"
+        }
+      },
+      {
+        "courseId": "course-111",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-111/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-111/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-111/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-111/product.png"
+        }
+      },
+      {
+        "courseId": "course-112",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-112/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-112/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-112/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-112/product.png"
+        }
+      },
+      {
+        "courseId": "course-113",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-113/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-113/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-113/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-113/product.png"
+        }
+      },
+      {
+        "courseId": "course-114",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-114/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-114/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-114/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-114/product.png"
+        }
+      },
+      {
+        "courseId": "course-115",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-115/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-115/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-115/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-115/product.png"
+        }
+      },
+      {
+        "courseId": "course-116",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-116/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-116/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-116/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/illustration/course-116/product.png"
+        }
+      }
+    ],
+    "video": [
+      {
+        "courseId": "course-201",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-201/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-201/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-201/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-201/product.png"
+        }
+      },
+      {
+        "courseId": "course-202",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-202/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-202/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-202/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-202/product.png"
+        }
+      },
+      {
+        "courseId": "course-203",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-203/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-203/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-203/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-203/product.png"
+        }
+      },
+      {
+        "courseId": "course-204",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-204/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-204/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-204/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-204/product.png"
+        }
+      },
+      {
+        "courseId": "course-205",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-205/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-205/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-205/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-205/product.png"
+        }
+      },
+      {
+        "courseId": "course-206",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-206/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-206/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-206/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-206/product.png"
+        }
+      },
+      {
+        "courseId": "course-207",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-207/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-207/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-207/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-207/product.png"
+        }
+      },
+      {
+        "courseId": "course-208",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-208/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-208/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-208/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-208/product.png"
+        }
+      },
+      {
+        "courseId": "course-209",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-209/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-209/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-209/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-209/product.png"
+        }
+      },
+      {
+        "courseId": "course-210",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-210/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-210/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-210/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-210/product.png"
+        }
+      },
+      {
+        "courseId": "course-211",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-211/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-211/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-211/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-211/product.png"
+        }
+      },
+      {
+        "courseId": "course-212",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-212/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-212/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-212/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-212/product.png"
+        }
+      },
+      {
+        "courseId": "course-213",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-213/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-213/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-213/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-213/product.png"
+        }
+      },
+      {
+        "courseId": "course-214",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-214/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-214/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-214/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-214/product.png"
+        }
+      },
+      {
+        "courseId": "course-215",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-215/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-215/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-215/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-215/product.png"
+        }
+      },
+      {
+        "courseId": "course-216",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-216/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-216/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-216/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-216/product.png"
+        }
+      },
+      {
+        "courseId": "course-217",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-217/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-217/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-217/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/video/course-217/product.png"
+        }
+      }
+    ],
+    "baking": [
+      {
+        "courseId": "course-301",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-301/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-301/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-301/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-301/product.png"
+        }
+      },
+      {
+        "courseId": "course-302",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-302/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-302/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-302/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-302/product.png"
+        }
+      },
+      {
+        "courseId": "course-303",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-303/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-303/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-303/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-303/product.png"
+        }
+      },
+      {
+        "courseId": "course-304",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-304/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-304/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-304/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-304/product.png"
+        }
+      },
+      {
+        "courseId": "course-305",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-305/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-305/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-305/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-305/product.png"
+        }
+      },
+      {
+        "courseId": "course-306",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-306/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-306/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-306/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-306/product.png"
+        }
+      },
+      {
+        "courseId": "course-307",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-307/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-307/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-307/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-307/product.png"
+        }
+      },
+      {
+        "courseId": "course-308",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-308/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-308/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-308/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-308/product.png"
+        }
+      },
+      {
+        "courseId": "course-309",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-309/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-309/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-309/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-309/product.png"
+        }
+      },
+      {
+        "courseId": "course-310",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-310/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-310/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-310/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-310/product.png"
+        }
+      },
+      {
+        "courseId": "course-311",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-311/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-311/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-311/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-311/product.png"
+        }
+      },
+      {
+        "courseId": "course-312",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-312/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-312/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-312/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-312/product.png"
+        }
+      },
+      {
+        "courseId": "course-313",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-313/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-313/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-313/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-313/product.png"
+        }
+      },
+      {
+        "courseId": "course-314",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-314/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-314/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-314/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-314/product.png"
+        }
+      },
+      {
+        "courseId": "course-315",
+        "variants": {
+          "thumbnail_cover_mobile": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-315/cover-mobile.png",
+          "thumbnail_cover_pc": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-315/cover-pc.png",
+          "thumbnail_list": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-315/list.png",
+          "thumbnail_product": "https://day1-co-design.github.io/figma-mock-plugin/assets/images/thumbnail/baking/course-315/product.png"
+        }
+      }
+    ]
+  }
+}
