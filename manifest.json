@@ -12,13 +12,8 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "https://day1-co-design.github.io",
-      "http://localhost:8001"
+      "https://day1-co-design.github.io"
     ],
-    "reasoning": "Load external mock text data from GitHub Pages and local development assets from localhost.",
-    "devAllowedDomains": [
-      "https://day1-co-design.github.io",
-      "http://localhost:8001"
-    ]
+    "reasoning": "Load external mock text and image data from GitHub Pages."
   }
 }

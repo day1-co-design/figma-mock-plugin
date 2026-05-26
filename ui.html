@@ -2,20 +2,22 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>Coloso Mock Data</title>
+    <title>목업 테스트</title>
     <style>
       :root {
-        color-scheme: light dark;
+        color-scheme: light;
         font-family: Inter, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-        --bg: #ffffff;
-        --text: #18181b;
-        --muted: #a1a1aa;
-        --line: #d4d4d8;
-        --line-strong: #dcdcdc;
-        --chip: #ffffff;
-        --chip-active: #27272a;
-        --chip-active-text: #ffffff;
-        --panel: #ffffff;
+        --gray-0: #ffffff;
+        --gray-100: #f4f4f5;
+        --gray-200: #e4e4e7;
+        --gray-300: #d4d4d8;
+        --gray-400: #a1a1aa;
+        --gray-500: #71717a;
+        --gray-600: #27272a;
+        --gray-700: #18181b;
+        --gray-800: #09090b;
+        --red-0: #fff7f8;
+        --red-500: #ed2040;
       }
 
       * {
@@ -24,28 +26,31 @@
 
       html,
       body {
-        margin: 0;
         width: 320px;
-        height: 520px;
+        height: 480px;
+        margin: 0;
         overflow: hidden;
-        background: var(--bg);
-        color: var(--text);
+        background: var(--gray-0);
+        color: var(--gray-700);
       }
 
       body {
         font-size: 12px;
+        line-height: 1.4;
       }
 
       button {
+        margin: 0;
         font: inherit;
+        color: inherit;
       }
 
       .panel {
         width: 320px;
-        height: 520px;
+        height: 480px;
         display: flex;
         flex-direction: column;
-        background: var(--bg);
+        background: var(--gray-0);
       }
 
       .tabs {
@@ -53,9 +58,9 @@
         display: flex;
         align-items: flex-end;
         gap: 4px;
-        padding: 6px 8px 0;
         height: 41px;
-        border-bottom: 1px solid var(--line-strong);
+        padding: 6px 8px 0;
+        border-bottom: 1px solid var(--gray-300);
       }
 
       .tab {
@@ -64,15 +69,14 @@
         height: 35px;
         border: 0;
         background: transparent;
-        color: var(--muted);
+        color: var(--gray-400);
         font-size: 12px;
         font-weight: 500;
         cursor: pointer;
       }
 
       .tab.active {
-        color: var(--text);
-        font-weight: 500;
+        color: var(--gray-700);
       }
 
       .tab.active::after {
@@ -82,1319 +86,973 @@
         right: 0;
         bottom: -1px;
         height: 1px;
-        background: var(--text);
+        background: var(--gray-700);
       }
 
       .scroll-area {
         flex: 1 1 auto;
         overflow-y: auto;
         overflow-x: hidden;
+      }
+
+      .form-block {
+        padding: 15px 16px 12px;
+        border-bottom: 1px solid var(--gray-300);
+      }
+
+      .form-block.compact {
         padding-bottom: 0;
-      }
-
-      .page {
-        display: none;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      .section-header {
-        display: flex;
-        align-items: center;
-        height: 46px;
-        padding: 0 16px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .section-header.split {
-        justify-content: space-between;
-      }
-
-      .section-header.with-line {
-        border-top: 1px solid var(--line-strong);
-      }
-
-      .section-title {
-        margin: 0;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-      }
-
-      .section-header.center-title {
-        position: relative;
-        justify-content: center;
-      }
-
-      .section-header.center-title .section-title {
-        text-align: center;
-      }
-
-      .section-action {
-        border: 0;
-        background: transparent;
-        color: var(--text);
-        line-height: 1;
-        width: 18px;
-        height: 18px;
-        padding: 0;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .section-header.center-title .section-action {
-        position: absolute;
-        left: 16px;
-      }
-
-      .image-view {
-        display: none;
-      }
-
-      .image-view.active {
-        display: block;
-      }
-
-      .block {
-        padding: 10px 16px 12px;
-      }
-
-      .button-block {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: 12px 16px 0;
-        background: transparent;
-      }
-
-      .block + .block {
-        border-top: 1px solid transparent;
+        border-bottom: 0;
       }
 
       .field-label {
         margin: 0 0 8px;
-        padding-left: 2px;
-        font-size: 12px;
-        font-weight: 500;
-        color: #27272a;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gray-700);
       }
 
       .chip-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px 6px;
+        gap: 4px;
       }
 
       .chip {
-        height: 34px;
-        border: 1px solid var(--line);
-        background: var(--chip);
-        color: var(--text);
-        border-radius: 999px;
-        padding: 10px 12px;
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 1;
-        cursor: pointer;
+        min-height: 34px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        gap: 2px;
+        padding: 8px 10px;
+        border: 1px solid var(--gray-300);
+        border-radius: 17px;
+        background: var(--gray-0);
+        color: var(--gray-600);
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .chip:hover:not(:disabled) {
+        background: var(--gray-100);
       }
 
       .chip.active {
-        border-color: var(--text);
-        background: var(--chip-active);
-        color: var(--chip-active-text);
+        border-color: var(--red-500);
+        background: var(--red-0);
+        color: var(--red-500);
       }
 
-      .chip.disabled {
-        opacity: 0.45;
-        cursor: not-allowed;
-      }
-
-      .helper {
-        margin: 14px 16px 0;
-        font-size: 11px;
-        line-height: 1.55;
-        color: #686868;
-      }
-
-      .status-text {
-        margin: 14px 16px 0;
-        font-size: 11px;
-        line-height: 1.55;
-        color: #686868;
-      }
-
-      .dev-only {
-        display: none;
-      }
-
-      .creator-list {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .creator-item {
-        width: 100%;
-        min-height: 45px;
-        border: 0;
-        border-bottom: 1px solid var(--line);
-        background: transparent;
-        color: var(--text);
-        border-radius: 0;
-        padding: 0 20px;
-        text-align: left;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .creator-item.active {
-        background: transparent;
-        color: var(--text);
-      }
-
-      .creator-item-check {
-        width: 16px;
-        height: 16px;
-        border: 1px solid var(--text);
-        border-radius: 4px;
-        flex: 0 0 auto;
-        position: relative;
-      }
-
-      .creator-item.active .creator-item-check {
-        background: var(--text);
-      }
-
-      .creator-item.active .creator-item-check::after {
-        content: "";
-        position: absolute;
-        left: 5px;
-        top: 2px;
-        width: 4px;
-        height: 8px;
-        border-right: 1.5px solid #ffffff;
-        border-bottom: 1.5px solid #ffffff;
-        transform: rotate(45deg);
-      }
-
-      .creator-item-label {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 1.2;
-      }
-
-      .creator-filter-block {
-        padding: 12px 16px 12px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .border-gap-block {
-        padding-bottom: 12px;
-      }
-
-      .creator-list-block {
-        padding-top: 13px;
-      }
-
-      .nav-icon {
-        width: 18px;
-        height: 18px;
-        display: block;
+      .chip-icon {
+        width: 15px;
+        height: 15px;
         flex: 0 0 auto;
       }
 
-      .nav-icon path {
-        stroke: #09090b;
+      .chip-icon path {
+        stroke: currentColor;
         stroke-width: 1.5;
         stroke-linecap: round;
         stroke-linejoin: round;
       }
 
-      .nav-icon.back {
+      .chip:disabled {
+        border-color: var(--gray-200);
+        background: var(--gray-100);
+        color: var(--gray-400);
+        cursor: not-allowed;
+      }
+
+      .select-shell {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .select-trigger {
+        width: 100%;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 0 12px;
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        background: var(--gray-0);
+        color: var(--gray-700);
+        font-size: 11px;
+        font-weight: 500;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .select-trigger:disabled {
+        background: var(--gray-100);
+        color: var(--gray-400);
+        cursor: not-allowed;
+      }
+
+      .select-trigger-value {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .select-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .select-icon path {
+        stroke: var(--gray-500);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .select-shell.open .select-icon {
         transform: rotate(180deg);
+      }
+
+      .select-menu {
+        display: none;
+        overflow: hidden;
+        flex-direction: column;
+        gap: 2px;
+        padding: 6px 8px;
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        background: var(--gray-0);
+      }
+
+      .select-shell.open .select-menu {
+        display: flex;
+      }
+
+      .select-option {
+        width: 100%;
+        min-height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        padding: 4px 6px;
+        border: 0;
+        border-radius: 4px;
+        background: transparent;
+        color: var(--gray-500);
+        font-size: 11px;
+        font-weight: 400;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .select-option:hover:not(:disabled) {
+        background: var(--gray-100);
+      }
+
+      .select-option.active {
+        color: var(--gray-700);
+        font-weight: 500;
+      }
+
+      .select-option-label {
+        min-width: 0;
+        flex: 1 1 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .select-option-check {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .select-option-check path {
+        stroke: currentColor;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .select-option:disabled {
+        background: var(--gray-100);
+        color: var(--gray-400);
+        cursor: not-allowed;
       }
 
       .footer {
         flex: 0 0 auto;
-        padding: 12px 16px 16px;
-        border-top: 0;
-        background: #ffffff;
+        padding: 10px 16px 16px;
+        background: var(--gray-0);
+      }
+
+      .footer.has-scroll-shadow {
+        box-shadow: 0 -5px 10px 0 rgba(0, 0, 0, 0.05);
+      }
+
+      .notice {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        min-height: 15px;
+        margin: 0 0 8px;
+        color: var(--gray-500);
+        font-size: 11px;
+        font-weight: 400;
+        text-align: center;
+      }
+
+      .notice-icon {
+        width: 15px;
+        height: 15px;
+        flex: 0 0 auto;
+      }
+
+      .notice-icon path {
+        stroke: var(--gray-500);
+        stroke-width: 1.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       .action-button {
         width: 100%;
-        height: 41px;
-        border: 1px solid var(--text);
+        height: 43px;
+        border: 1px solid var(--gray-700);
         border-radius: 6px;
-        background: var(--text);
-        color: #ffffff;
-        font-size: 14px;
+        background: var(--gray-700);
+        color: var(--gray-0);
+        font-size: 12px;
         font-weight: 500;
         cursor: pointer;
       }
 
       .action-button:disabled {
-        opacity: 0.38;
+        border-color: var(--gray-200);
+        background: var(--gray-200);
+        color: var(--gray-400);
         cursor: not-allowed;
       }
     </style>
   </head>
   <body>
     <main class="panel">
-      <nav class="tabs" aria-label="Mock data tabs">
-        <button class="tab active" data-tab="image" type="button">Image</button>
-        <button class="tab" data-tab="text" type="button">Text</button>
+      <nav class="tabs" aria-label="mock data tab">
+        <button class="tab active" data-tab="profile" type="button">프로필</button>
+        <button class="tab" data-tab="class" type="button">클래스</button>
       </nav>
 
       <div class="scroll-area">
-        <section class="page active" data-page="image">
-          <div class="image-view active" id="imageMainView">
-            <div class="section-header split">
-              <h2 class="section-title">Avatar</h2>
-              <button class="section-action" id="openCreatorPageButton" type="button" aria-label="creator list">
-                <svg class="nav-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M7 5.5L10.5 9L7 12.5"></path>
-                </svg>
-              </button>
-            </div>
-
-            <div class="block button-block">
-              <p class="field-label">Type</p>
-              <div class="chip-row" id="imageTypeGroup">
-                <button class="chip" data-image-type="creator" type="button">creator</button>
-              </div>
-            </div>
-
-            <div class="block button-block border-gap-block">
-              <p class="field-label">Category</p>
-              <div class="chip-row" id="imageCategoryGroup">
-                <button class="chip" data-image-category="illust" type="button">illustration</button>
-                <button class="chip" data-image-category="video" type="button">Video</button>
-                <button class="chip" data-image-category="baking" type="button">baking</button>
-              </div>
-            </div>
-
-            <div class="section-header with-line">
-              <h2 class="section-title">Course Thumbnail</h2>
-            </div>
-
-            <div class="block button-block">
-              <p class="field-label">Type</p>
-              <div class="chip-row" id="thumbnailTypeGroup">
-                <button class="chip" data-image-type="thumbnail_cover_mobile" type="button">cover mobile</button>
-                <button class="chip" data-image-type="thumbnail_cover_pc" type="button">cover pc</button>
-                <button class="chip" data-image-type="thumbnail_list" type="button">list</button>
-                <button class="chip" data-image-type="thumbnail_product" type="button">product</button>
-              </div>
-            </div>
-
-            <div class="block button-block">
-              <p class="field-label">Category</p>
-              <div class="chip-row" id="thumbnailCategoryGroup">
-                <button class="chip" data-thumbnail-category="illust" type="button">illustration</button>
-                <button class="chip" data-thumbnail-category="video" type="button">Video</button>
-                <button class="chip" data-thumbnail-category="baking" type="button">baking</button>
-              </div>
-            </div>
-
-            <p class="status-text dev-only" id="imageStatusText">
-              카테고리를 선택한 뒤 creator 이미지를 적용할 수 있어요.
-            </p>
-          </div>
-
-          <div class="image-view" id="imageCreatorView">
-            <div class="section-header center-title">
-              <button class="section-action" id="backToImageMainButton" type="button" aria-label="back">
-                <svg class="nav-icon back" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <path d="M7 5.5L10.5 9L7 12.5"></path>
-                </svg>
-              </button>
-              <h2 class="section-title">선택 적용</h2>
-            </div>
-
-            <div class="creator-filter-block button-block">
-              <div class="chip-row" id="creatorFilterCategoryGroup">
-                <button class="chip" data-creator-filter-category="all" type="button">All</button>
-                <button class="chip" data-creator-filter-category="illust" type="button">illustration</button>
-                <button class="chip" data-creator-filter-category="video" type="button">Video</button>
-                <button class="chip" data-creator-filter-category="baking" type="button">baking</button>
-              </div>
-            </div>
-
-            <div class="creator-list-block">
-              <div class="creator-list" id="creatorList"></div>
-            </div>
-
-            <p class="status-text dev-only" id="creatorStatusText">
-              적용할 크리에이터를 선택해 주세요.
-            </p>
-          </div>
+        <section class="form-block">
+          <p class="field-label">데이터 종류</p>
+          <div class="chip-row" id="dataKindGroup"></div>
         </section>
 
-        <section class="page" data-page="text">
-          <div class="section-header">
-            <h2 class="section-title">Course Info</h2>
-          </div>
+        <section class="form-block" id="dataTypeBlock">
+          <p class="field-label">데이터 유형 선택</p>
+          <div id="dataTypeSelect"></div>
+        </section>
 
-          <div class="block button-block">
-            <p class="field-label">Type</p>
-            <div class="chip-row" id="courseInfoTypeGroup">
-              <button class="chip" data-text-type="creator_name" type="button">creator</button>
-              <button class="chip" data-text-type="job_title" type="button">job</button>
-              <button class="chip" data-text-type="job_creator" type="button">job + creator</button>
-              <button class="chip" data-text-type="course_title" type="button">course title</button>
-            </div>
-          </div>
-
-          <div class="block button-block border-gap-block">
-            <p class="field-label">Category</p>
-            <div class="chip-row" id="courseCategoryGroup">
-              <button class="chip" data-course-category="illust" type="button">illustration</button>
-              <button class="chip" data-course-category="video" type="button">Video</button>
-              <button class="chip" data-course-category="baking" type="button">baking</button>
-            </div>
-          </div>
-
-          <div class="section-header with-line">
-            <h2 class="section-title">Data</h2>
-          </div>
-
-          <div class="block button-block">
-            <div class="chip-row" id="generalTypeGroup">
-              <button class="chip" data-text-type="date_yyyy" type="button">yyyy.mm.dd</button>
-              <button class="chip" data-text-type="date_yy" type="button">yy.mm.dd</button>
-            </div>
-          </div>
-
-          <p class="helper" id="helperText">
-            코스 정보 타입은 Type 1개와 Category 1개를 함께 선택해야 적용됩니다.
-          </p>
+        <section class="form-block" id="categoryBlock">
+          <p class="field-label">카테고리 선택</p>
+          <div id="categorySelect"></div>
         </section>
       </div>
 
       <footer class="footer">
-        <button class="action-button" id="randomButton" type="button">적용</button>
+        <p class="notice" id="noticeText">
+          <svg class="notice-icon" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+            <path d="M7.5 5.25V8.25"></path>
+            <path d="M7.5 10.5H7.50667"></path>
+            <path d="M6.22273 2.53461L1.40023 10.6971C1.28795 10.8894 1.22866 11.108 1.22833 11.3306C1.22801 11.5532 1.28666 11.772 1.39838 11.9647C1.51011 12.1573 1.67104 12.3171 1.86446 12.4274C2.05789 12.5378 2.27703 12.5949 2.49973 12.5931H12.1447C12.3674 12.5949 12.5866 12.5378 12.78 12.4274C12.9734 12.3171 13.1344 12.1573 13.2461 11.9647C13.3578 11.772 13.4165 11.5532 13.4161 11.3306C13.4158 11.108 13.3565 10.8894 13.2442 10.6971L8.42173 2.53461C8.30772 2.34838 8.14764 2.19475 7.95695 2.08813C7.76626 1.98152 7.55139 1.92554 7.33294 1.92554C7.11449 1.92554 6.89962 1.98152 6.70893 2.08813C6.51824 2.19475 6.35816 2.34838 6.24415 2.53461H6.22273Z"></path>
+          </svg>
+          <span>적용할 이미지 레이어를 선택하세요</span>
+        </p>
+        <button class="action-button" id="applyButton" type="button">선택된 레이어 없음</button>
       </footer>
     </main>
 
     <script>
-      var state = {
-        activeTab: 'image',
-        textType: 'creator_name',
-        courseCategory: null,
-        imageType: 'creator',
-        imageCategory: 'baking',
-        thumbnailCategory: 'baking',
-        creatorFilterCategory: 'all',
-        imageView: 'main',
-        isApplyingImage: false,
-        imageApplyRequestId: 0
-      };
-
-      var TEXT_TYPE_LABELS = {
-        creator_name: '연사명',
-        job_title: '직업명',
-        job_creator: '직업명 + 연사명',
-        course_title: '코스 타이틀',
-        date_yyyy: '날짜형 YYYY.MM.DD',
-        date_yy: '날짜형 YY.MM.DD'
-      };
-      var TEXT_DATA_SOURCE_URLS = [
-        'https://day1-co-design.github.io/figma-mock-plugin/data/text-course-info.json',
-        'http://localhost:8001/data/text-course-info.json'
+      const TEXT_DATA_URLS = [
+        "https://day1-co-design.github.io/figma-mock-plugin/data/text-course-info.json"
       ];
-      var courseInfoData = null;
-      var textDataLoadState = 'loading';
-      var textDataLoadPromise = null;
-
-      var IMAGE_DATA_SOURCE_URLS = [
-        'https://day1-co-design.github.io/figma-mock-plugin/data/image-assets.json',
-        'http://localhost:8001/data/image-assets.json'
+      const IMAGE_DATA_URLS = [
+        "https://day1-co-design.github.io/figma-mock-plugin/data/image-assets.json"
       ];
-      var imageData = null;
-      var imageDataLoadState = 'loading';
-      var imageDataLoadPromise = null;
-      var selectedCreatorByCategory = {
-        all: null,
-        baking: null,
-        video: null,
-        illust: null
+
+      const CATEGORY_OPTIONS = [
+        { value: "all", label: "전체" },
+        { value: "illust", label: "드로잉" },
+        { value: "video", label: "영상 디자인" },
+        { value: "baking", label: "베이킹" }
+      ];
+
+      const PROFILE_TEXT_TYPE_OPTIONS = [
+        { value: "creator_name", label: "크리에이터명" },
+        { value: "job_creator", label: "직업 + 크리에이터명" },
+        { value: "job_title", label: "직업명" }
+      ];
+
+      const CLASS_IMAGE_TYPE_OPTIONS = [
+        { value: "thumbnail_list", label: "코스 카드 썸네일" },
+        { value: "thumbnail_product", label: "상품 썸네일(1:1)" },
+        { value: "thumbnail_cover_pc", label: "상세페이지 커버 - PC" },
+        { value: "thumbnail_cover_mobile", label: "상세페이지 커버 - Mobile" }
+      ];
+
+      const CLASS_TEXT_TYPE_OPTIONS = [{ value: "course_title", label: "강의 제목" }];
+
+      const state = {
+        activeTab: "profile",
+        profileDataKind: "avatar",
+        classDataKind: "course_image",
+        profileDataType: "creator_name",
+        classImageDataType: "thumbnail_list",
+        classTextDataType: "course_title",
+        profileCategory: "all",
+        classCategory: "all",
+        selectionState: {
+          imageCount: 0,
+          textCount: 0
+        },
+        openSelectId: null,
+        isApplying: false,
+        textDataLoadState: "loading",
+        imageDataLoadState: "loading",
+        courseInfoData: null,
+        imageData: null
       };
 
-      var helperText = document.getElementById('helperText');
+      const tabButtons = Array.prototype.slice.call(document.querySelectorAll("[data-tab]"));
+      const dataKindGroup = document.getElementById("dataKindGroup");
+      const scrollArea = document.querySelector(".scroll-area");
+      const footer = document.querySelector(".footer");
+      const dataTypeBlock = document.getElementById("dataTypeBlock");
+      const dataTypeSelect = document.getElementById("dataTypeSelect");
+      const categorySelect = document.getElementById("categorySelect");
+      const noticeText = document.getElementById("noticeText");
+      const applyButton = document.getElementById("applyButton");
 
-      var imageStatusText = document.getElementById('imageStatusText');
-      var creatorStatusText = document.getElementById('creatorStatusText');
-      var creatorList = document.getElementById('creatorList');
-      var imageMainView = document.getElementById('imageMainView');
-      var imageCreatorView = document.getElementById('imageCreatorView');
-      var openCreatorPageButton = document.getElementById('openCreatorPageButton');
-      var backToImageMainButton = document.getElementById('backToImageMainButton');
-      var randomButton = document.getElementById('randomButton');
-      var tabButtons = Array.prototype.slice.call(document.querySelectorAll('[data-tab]'));
-      var pages = Array.prototype.slice.call(document.querySelectorAll('[data-page]'));
-      var typeButtons = Array.prototype.slice.call(document.querySelectorAll('[data-text-type]'));
-      var imageTypeButtons = Array.prototype.slice.call(document.querySelectorAll('[data-image-type]'));
-      var imageCategoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-image-category]'));
-      var thumbnailCategoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-thumbnail-category]'));
-      var creatorFilterCategoryButtons = Array.prototype.slice.call(
-        document.querySelectorAll('[data-creator-filter-category]')
-      );
-      var categoryButtons = Array.prototype.slice.call(document.querySelectorAll('[data-course-category]'));
+      function getDataKindOptions() {
+        if (state.activeTab === "profile") {
+          return [
+            { value: "avatar", label: "아바타" },
+            { value: "creator_info", label: "크리에이터 정보" }
+          ];
+        }
 
-      function isCourseInfoType(textType) {
-        return (
-          textType === 'creator_name' ||
-          textType === 'job_title' ||
-          textType === 'job_creator' ||
-          textType === 'course_title'
-        );
+        return [
+          { value: "course_image", label: "코스 이미지" },
+          { value: "course_info", label: "강의 정보" }
+        ];
       }
 
-      function updateTab(nextTab) {
-        state.activeTab = nextTab;
-
-        for (var i = 0; i < tabButtons.length; i += 1) {
-          var tabButton = tabButtons[i];
-          if (tabButton.getAttribute('data-tab') === nextTab) {
-            tabButton.classList.add('active');
-          } else {
-            tabButton.classList.remove('active');
-          }
-        }
-
-        for (var j = 0; j < pages.length; j += 1) {
-          var page = pages[j];
-          if (page.getAttribute('data-page') === nextTab) {
-            page.classList.add('active');
-          } else {
-            page.classList.remove('active');
-          }
-        }
-
-        updateActionState();
+      function getCurrentCategory() {
+        return state.activeTab === "profile" ? state.profileCategory : state.classCategory;
       }
 
-      function updateTypeSelection(nextType) {
-        state.textType = nextType;
-
-        for (var i = 0; i < typeButtons.length; i += 1) {
-          var button = typeButtons[i];
-          if (button.getAttribute('data-text-type') === nextType) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
-        }
-
-        updateCategoryState();
-        updateHelperText();
-        updateActionState();
+      function getCurrentDataKind() {
+        return state.activeTab === "profile" ? state.profileDataKind : state.classDataKind;
       }
 
-      function updateCourseCategory(nextCategory) {
-        state.courseCategory = nextCategory;
-
-        for (var i = 0; i < categoryButtons.length; i += 1) {
-          var button = categoryButtons[i];
-          if (button.getAttribute('data-course-category') === nextCategory) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
+      function getCurrentDataTypeOptions() {
+        if (state.activeTab === "profile") {
+          return state.profileDataKind === "creator_info" ? PROFILE_TEXT_TYPE_OPTIONS : [];
         }
 
-        updateHelperText();
-        updateActionState();
+        if (state.classDataKind === "course_image") {
+          return CLASS_IMAGE_TYPE_OPTIONS;
+        }
+
+        return CLASS_TEXT_TYPE_OPTIONS;
       }
 
-      function updateImageTypeSelection(nextType) {
-        state.imageType = nextType;
-
-        for (var i = 0; i < imageTypeButtons.length; i += 1) {
-          var button = imageTypeButtons[i];
-          if (button.getAttribute('data-image-type') === nextType) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
+      function getCurrentDataTypeValue() {
+        if (state.activeTab === "profile") {
+          return state.profileDataType;
         }
 
-        updateActionState();
+        if (state.classDataKind === "course_image") {
+          return state.classImageDataType;
+        }
+
+        return state.classTextDataType;
       }
 
-      function updateImageCategorySelection(nextCategory) {
-        state.imageCategory = nextCategory;
-
-        for (var i = 0; i < imageCategoryButtons.length; i += 1) {
-          var button = imageCategoryButtons[i];
-          if (button.getAttribute('data-image-category') === nextCategory) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
+      function setCurrentDataTypeValue(value) {
+        if (state.activeTab === "profile") {
+          state.profileDataType = value;
+          return;
         }
 
-        renderCreatorList();
-        updateImageStatusText();
-        updateCreatorStatusText();
-        updateActionState();
+        if (state.classDataKind === "course_image") {
+          state.classImageDataType = value;
+          return;
+        }
+
+        state.classTextDataType = value;
       }
 
-      function updateThumbnailCategorySelection(nextCategory) {
-        state.thumbnailCategory = nextCategory;
-
-        for (var i = 0; i < thumbnailCategoryButtons.length; i += 1) {
-          var button = thumbnailCategoryButtons[i];
-          if (button.getAttribute('data-thumbnail-category') === nextCategory) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
+      function shouldShowDataTypeBlock() {
+        if (state.activeTab === "profile") {
+          return state.profileDataKind === "creator_info";
         }
 
-        updateImageStatusText();
-        updateActionState();
+        return true;
       }
 
-      function updateCreatorFilterCategory(nextCategory) {
-        state.creatorFilterCategory = nextCategory;
-
-        for (var i = 0; i < creatorFilterCategoryButtons.length; i += 1) {
-          var button = creatorFilterCategoryButtons[i];
-          if (button.getAttribute('data-creator-filter-category') === nextCategory) {
-            button.classList.add('active');
-          } else {
-            button.classList.remove('active');
-          }
-        }
-
-        renderCreatorList();
-        updateCreatorStatusText();
-        updateActionState();
+      function isDataTypeDisabled() {
+        return state.activeTab === "class" && state.classDataKind === "course_info";
       }
 
-      function updateImageView(nextView) {
-        state.imageView = nextView;
-
-        if (nextView === 'creator') {
-          imageMainView.classList.remove('active');
-          imageCreatorView.classList.add('active');
-        } else {
-          imageMainView.classList.add('active');
-          imageCreatorView.classList.remove('active');
+      function getTargetMode() {
+        if (state.activeTab === "profile" && state.profileDataKind === "avatar") {
+          return "image";
         }
 
-        updateImageStatusText();
-        updateCreatorStatusText();
-        updateActionState();
+        if (state.activeTab === "class" && state.classDataKind === "course_image") {
+          return "image";
+        }
+
+        return "text";
       }
 
-      async function ensureImageData() {
-        if (imageData) {
-          return imageData;
-        }
-
-        if (imageDataLoadPromise) {
-          return imageDataLoadPromise;
-        }
-
-        imageDataLoadState = 'loading';
-        updateImageStatusText();
-        updateCreatorStatusText();
-        updateActionState();
-
-        imageDataLoadPromise = (async function () {
-          var lastError = null;
-
-          for (var i = 0; i < IMAGE_DATA_SOURCE_URLS.length; i += 1) {
-            var sourceUrl = IMAGE_DATA_SOURCE_URLS[i];
-
-            try {
-              var response = await fetch(sourceUrl);
-              if (!response.ok) {
-                throw new Error('status ' + String(response.status));
-              }
-
-              var json = await response.json();
-              imageData = json;
-              imageDataLoadState = 'ready';
-              updateImageStatusText();
-              updateCreatorStatusText();
-              updateActionState();
-              renderCreatorList();
-              console.log('[ImageData] loaded from', sourceUrl);
-              return imageData;
-            } catch (error) {
-              lastError = error;
-              console.warn('[ImageData] failed to load from', sourceUrl, error);
-            }
-          }
-
-          imageDataLoadState = 'error';
-          imageDataLoadPromise = null;
-          updateImageStatusText();
-          updateCreatorStatusText();
-          updateActionState();
-          renderCreatorList();
-          throw lastError || new Error('이미지 데이터를 불러오지 못했어요.');
-        })();
-
-        return imageDataLoadPromise;
+      function getSelectionCountForCurrentState() {
+        return getTargetMode() === "image"
+          ? state.selectionState.imageCount
+          : state.selectionState.textCount;
       }
 
-      function getImageCreatorOptions(category) {
-        if (!imageData || !imageData.profile) {
+      function flattenCourseInfo(category) {
+        if (!state.courseInfoData) {
           return [];
         }
 
-        if (category === 'all') {
+        if (category === "all") {
           return []
-            .concat(imageData.profile.illust || [])
-            .concat(imageData.profile.video || [])
-            .concat(imageData.profile.baking || []);
+            .concat(state.courseInfoData.illust || [])
+            .concat(state.courseInfoData.video || [])
+            .concat(state.courseInfoData.baking || []);
         }
 
-        return imageData.profile[category] || [];
+        return state.courseInfoData[category] || [];
       }
 
-      function getThumbnailVariantOptions(category, imageType) {
-        if (!imageData || !imageData.thumbnail) {
+      function flattenProfileImages(category) {
+        if (!state.imageData || !state.imageData.profile) {
           return [];
         }
 
-        var courses = imageData.thumbnail[category] || [];
-        var options = [];
+        if (category === "all") {
+          return []
+            .concat(state.imageData.profile.illust || [])
+            .concat(state.imageData.profile.video || [])
+            .concat(state.imageData.profile.baking || []);
+        }
 
-        for (var i = 0; i < courses.length; i += 1) {
-          var course = courses[i];
-          var imageUrl = course.variants[imageType];
-          if (imageUrl) {
-            options.push({
-              courseId: course.courseId,
-              url: imageUrl
+        return state.imageData.profile[category] || [];
+      }
+
+      function flattenThumbnailVariants(category, variant) {
+        if (!state.imageData || !state.imageData.thumbnail) {
+          return [];
+        }
+
+        const source = category === "all"
+          ? []
+              .concat(state.imageData.thumbnail.illust || [])
+              .concat(state.imageData.thumbnail.video || [])
+              .concat(state.imageData.thumbnail.baking || [])
+          : state.imageData.thumbnail[category] || [];
+
+        return source
+          .map(function (item) {
+            return {
+              courseId: item.courseId,
+              url: item.variants && item.variants[variant] ? item.variants[variant] : null
+            };
+          })
+          .filter(function (item) {
+            return !!item.url;
+          });
+      }
+
+      function getTextValuesForCurrentState() {
+        const rows = flattenCourseInfo(getCurrentCategory());
+
+        if (state.activeTab === "profile") {
+          if (state.profileDataType === "creator_name") {
+            return rows.map(function (item) {
+              return item.creator_name;
             });
           }
-        }
 
-        return options;
-      }
-
-      function getSelectedCreator(category) {
-
-        return selectedCreatorByCategory[category];
-      }
-
-      function setSelectedCreator(category, creator) {
-        selectedCreatorByCategory[category] = creator;
-        renderCreatorList();
-        updateImageStatusText();
-        updateCreatorStatusText();
-        updateActionState();
-      }
-
-      function renderCreatorList() {
-        creatorList.innerHTML = '';
-
-        var options = getImageCreatorOptions(state.creatorFilterCategory);
-        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
-
-        for (var i = 0; i < options.length; i += 1) {
-          var creator = options[i];
-          var button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'creator-item';
-          var check = document.createElement('span');
-          check.className = 'creator-item-check';
-          var label = document.createElement('span');
-          label.className = 'creator-item-label';
-          label.textContent = creator.name;
-          button.appendChild(check);
-          button.appendChild(label);
-
-          if (selectedCreator && selectedCreator.url === creator.url) {
-            button.classList.add('active');
+          if (state.profileDataType === "job_creator") {
+            return rows.map(function (item) {
+              return item.job_title + " " + item.creator_name;
+            });
           }
 
-          button.addEventListener('click', (function (nextCreator) {
-            return function () {
-              setSelectedCreator(state.creatorFilterCategory, nextCreator);
-            };
-          })(creator));
-
-          creatorList.appendChild(button);
-        }
-      }
-
-      function updateImageStatusText() {
-        if (imageDataLoadState === 'loading') {
-          setImageStatus('이미지 데이터를 불러오는 중이에요.');
-          return;
-        }
-
-        if (imageDataLoadState === 'error') {
-          setImageStatus('이미지 데이터를 불러오지 못했어요. GitHub Pages 또는 로컬 서버를 확인해 주세요.');
-          return;
-        }
-
-        if (state.imageType !== 'creator') {
-          setImageStatus('썸네일 타입과 카테고리를 선택한 뒤 적용할 수 있어요.');
-          return;
-        }
-
-        var selectedCreator = getSelectedCreator(state.imageCategory);
-
-        if (selectedCreator) {
-          setImageStatus('선택된 크리에이터: ' + selectedCreator.name + '. > 버튼으로 변경할 수 있어요.');
-          return;
-        }
-
-        setImageStatus('카테고리를 선택한 뒤 creator 이미지를 적용할 수 있어요.');
-      }
-
-      function updateCreatorStatusText() {
-        if (imageDataLoadState === 'loading') {
-          setCreatorStatus('크리에이터 이미지를 불러오는 중이에요.');
-          return;
-        }
-
-        if (imageDataLoadState === 'error') {
-          setCreatorStatus('크리에이터 이미지를 불러오지 못했어요.');
-          return;
-        }
-
-        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
-
-        if (selectedCreator) {
-          setCreatorStatus(selectedCreator.name + ' 프로필 이미지를 적용할 준비가 됐어요.');
-          return;
-        }
-
-        setCreatorStatus('적용할 크리에이터를 선택해 주세요.');
-      }
-
-      function updateCategoryState() {
-        var enabled = isCourseInfoType(state.textType);
-
-        for (var i = 0; i < categoryButtons.length; i += 1) {
-          var button = categoryButtons[i];
-          button.disabled = !enabled;
-          if (enabled) {
-            button.classList.remove('disabled');
-          } else {
-            button.classList.add('disabled');
-          }
-        }
-      }
-
-      function updateHelperText() {
-        if (isCourseInfoType(state.textType)) {
-          if (textDataLoadState === 'loading') {
-            helperText.textContent = '텍스트 데이터를 불러오는 중이에요.';
-            return;
-          }
-
-          if (textDataLoadState === 'error') {
-            helperText.textContent = '텍스트 데이터를 불러오지 못했어요. GitHub Pages 또는 로컬 서버를 확인해 주세요.';
-            return;
-          }
-
-          if (!state.courseCategory) {
-            helperText.textContent = '코스 정보 타입은 Category를 선택한 뒤 적용할 수 있어요.';
-            return;
-          }
-
-          helperText.textContent = '선택한 코스 정보 타입과 카테고리 기준으로 데이터가 적용됩니다.';
-          return;
-        }
-
-        helperText.textContent = '날짜형은 카테고리 선택 없이 오늘부터 3개월 범위 안에서 랜덤 적용돼요.';
-      }
-
-      function updateActionState() {
-        if (state.activeTab === 'image') {
-          if (state.isApplyingImage) {
-            randomButton.disabled = true;
-            randomButton.textContent = '불러오는 중...';
-            return;
-          }
-
-          if (imageDataLoadState === 'loading') {
-            randomButton.disabled = true;
-            randomButton.textContent = '불러오는 중...';
-            return;
-          }
-
-          if (imageDataLoadState === 'error') {
-            randomButton.disabled = true;
-            randomButton.textContent = '적용';
-            return;
-          }
-
-          if (state.imageView === 'creator') {
-            randomButton.disabled = !(state.imageType === 'creator' && !!getSelectedCreator(state.creatorFilterCategory));
-            randomButton.textContent = '적용';
-            return;
-          }
-
-          if (state.imageType === 'creator') {
-            randomButton.disabled = getImageCreatorOptions(state.imageCategory).length === 0;
-            randomButton.textContent = '적용';
-            return;
-          }
-
-          randomButton.disabled = getThumbnailVariantOptions(state.thumbnailCategory, state.imageType).length === 0;
-          randomButton.textContent = '적용';
-          return;
-        }
-
-        if (isCourseInfoType(state.textType)) {
-          if (textDataLoadState === 'loading') {
-            randomButton.disabled = true;
-            randomButton.textContent = '불러오는 중...';
-            return;
-          }
-
-          if (textDataLoadState === 'error') {
-            randomButton.disabled = true;
-            randomButton.textContent = '적용';
-            return;
-          }
-
-          randomButton.disabled = !state.courseCategory;
-          randomButton.textContent = '적용';
-          return;
-        }
-
-        randomButton.disabled = false;
-        randomButton.textContent = '적용';
-      }
-
-      async function ensureCourseInfoData() {
-        if (courseInfoData) {
-          return courseInfoData;
-        }
-
-        if (textDataLoadPromise) {
-          return textDataLoadPromise;
-        }
-
-        textDataLoadState = 'loading';
-        updateHelperText();
-        updateActionState();
-
-        textDataLoadPromise = (async function () {
-          var lastError = null;
-
-          for (var i = 0; i < TEXT_DATA_SOURCE_URLS.length; i += 1) {
-            var sourceUrl = TEXT_DATA_SOURCE_URLS[i];
-
-            try {
-              var response = await fetch(sourceUrl);
-              if (!response.ok) {
-                throw new Error('status ' + String(response.status));
-              }
-
-              var json = await response.json();
-              courseInfoData = json;
-              textDataLoadState = 'ready';
-              updateHelperText();
-              updateActionState();
-              console.log('[TextData] loaded from', sourceUrl);
-              return courseInfoData;
-            } catch (error) {
-              lastError = error;
-              console.warn('[TextData] failed to load from', sourceUrl, error);
-            }
-          }
-
-          textDataLoadState = 'error';
-          textDataLoadPromise = null;
-          updateHelperText();
-          updateActionState();
-          throw lastError || new Error('텍스트 데이터를 불러오지 못했어요.');
-        })();
-
-        return textDataLoadPromise;
-      }
-
-      function getCourseInfoRows(courseCategory) {
-        if (!courseInfoData || !courseCategory) {
-          return [];
-        }
-
-        return courseInfoData[courseCategory] || [];
-      }
-
-      function createDateRangeValues(textType) {
-        var startDate = getTodayDate();
-        var endDate = new Date(startDate.getTime());
-        endDate.setMonth(endDate.getMonth() + 3);
-
-        var dates = [];
-        var currentDate = new Date(startDate.getTime());
-
-        while (currentDate.getTime() <= endDate.getTime()) {
-          dates.push(formatDate(currentDate, textType));
-          currentDate.setDate(currentDate.getDate() + 1);
-        }
-
-        return dates;
-      }
-
-      function getTodayDate() {
-        var now = new Date();
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0, 0);
-      }
-
-      function formatDate(date, textType) {
-        var year = date.getFullYear();
-        var shortYear = String(year).slice(-2);
-        var month = padNumber(date.getMonth() + 1);
-        var day = padNumber(date.getDate());
-
-        if (textType === 'date_yy') {
-          return shortYear + '.' + month + '.' + day;
-        }
-
-        return String(year) + '.' + month + '.' + day;
-      }
-
-      function padNumber(value) {
-        if (value < 10) {
-          return '0' + String(value);
-        }
-
-        return String(value);
-      }
-
-      function getTextValuesForApply() {
-        if (state.textType === 'date_yyyy' || state.textType === 'date_yy') {
-          return createDateRangeValues(state.textType);
-        }
-
-        if (!state.courseCategory) {
-          return null;
-        }
-
-        var rows = getCourseInfoRows(state.courseCategory);
-
-        if (state.textType === 'creator_name') {
-          return rows.map(function (item) {
-            return item.creator_name;
-          });
-        }
-
-        if (state.textType === 'job_title') {
           return rows.map(function (item) {
             return item.job_title;
           });
         }
 
-        if (state.textType === 'job_creator') {
-          return rows.map(function (item) {
-            return item.job_title + ' ' + item.creator_name;
-          });
-        }
-
         return rows
           .map(function (item) {
-            return item.course_title || '';
+            return item.course_title || "";
           })
           .filter(function (value) {
             return value.length > 0;
           });
       }
 
-      async function postApplyMessage() {
-        if (isCourseInfoType(state.textType)) {
-          try {
-            await ensureCourseInfoData();
-          } catch (error) {
-            parent.postMessage(
-              {
-                pluginMessage: {
-                  type: 'show-toast',
-                  message: '텍스트 데이터를 불러오지 못했어요.'
-                }
-              },
-              '*'
-            );
-            return;
-          }
+      function getTextSuccessLabel() {
+        if (state.activeTab === "profile") {
+          const found = PROFILE_TEXT_TYPE_OPTIONS.find(function (item) {
+            return item.value === state.profileDataType;
+          });
+          return found ? found.label : "텍스트";
         }
 
-        var values = getTextValuesForApply();
-        if (!values || values.length === 0) {
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: 'show-toast',
-                message: '선택한 데이터 유형에 사용할 값이 없어요.'
-              }
-            },
-            '*'
-          );
+        return "강의 제목";
+      }
+
+      function getCurrentImageUrls() {
+        if (state.activeTab === "profile") {
+          return flattenProfileImages(getCurrentCategory()).map(function (item) {
+            return {
+              name: item.name,
+              url: item.url
+            };
+          });
+        }
+
+        return flattenThumbnailVariants(getCurrentCategory(), state.classImageDataType).map(function (item) {
+          return {
+            name: item.courseId + "-" + state.classImageDataType,
+            url: item.url
+          };
+        });
+      }
+
+      function getImageSuccessLabel() {
+        if (state.activeTab === "profile") {
+          return "아바타";
+        }
+
+        const found = CLASS_IMAGE_TYPE_OPTIONS.find(function (item) {
+          return item.value === state.classImageDataType;
+        });
+        return found ? found.label : "코스 이미지";
+      }
+
+      function renderTabs() {
+        for (const button of tabButtons) {
+          button.classList.toggle("active", button.getAttribute("data-tab") === state.activeTab);
+        }
+      }
+
+      function renderDataKindButtons() {
+        dataKindGroup.innerHTML = "";
+        const currentDataKind = getCurrentDataKind();
+
+        for (const option of getDataKindOptions()) {
+          const isActive = option.value === currentDataKind;
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "chip";
+          button.classList.toggle("active", isActive);
+
+          if (isActive) {
+            button.insertAdjacentHTML("beforeend", getCheckSvg("chip-icon"));
+          }
+
+          const label = document.createElement("span");
+          label.textContent = option.label;
+          button.appendChild(label);
+
+          button.addEventListener("click", function () {
+            if (state.activeTab === "profile") {
+              state.profileDataKind = option.value;
+            } else {
+              state.classDataKind = option.value;
+            }
+            state.openSelectId = null;
+            render();
+          });
+          dataKindGroup.appendChild(button);
+        }
+      }
+
+      function getCheckSvg(className) {
+        return [
+          '<svg class="' + className + '" viewBox="0 0 18 18" fill="none" aria-hidden="true">',
+          '<path d="M14.25 5.25L7.125 12.375L3.75 9"></path>',
+          '</svg>'
+        ].join("");
+      }
+
+      function getChevronSvg() {
+        return [
+          '<svg class="select-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">',
+          '<path d="M5.4 6.9L9 10.5L12.6 6.9"></path>',
+          '</svg>'
+        ].join("");
+      }
+
+      function renderSelect(target, config) {
+        target.innerHTML = "";
+
+        const shell = document.createElement("div");
+        shell.className = "select-shell";
+        if (state.openSelectId === config.id && !config.disabled) {
+          shell.classList.add("open");
+        }
+
+        const trigger = document.createElement("button");
+        trigger.type = "button";
+        trigger.className = "select-trigger";
+        trigger.disabled = !!config.disabled;
+        trigger.innerHTML = '<span class="select-trigger-value"></span>' + getChevronSvg();
+
+        const valueNode = trigger.querySelector(".select-trigger-value");
+        const selectedOption = config.options.find(function (item) {
+          return item.value === config.value;
+        });
+        valueNode.textContent = selectedOption ? selectedOption.label : config.placeholder;
+
+        trigger.addEventListener("click", function (event) {
+          event.stopPropagation();
+          if (config.disabled) {
+            return;
+          }
+          state.openSelectId = state.openSelectId === config.id ? null : config.id;
+          render();
+        });
+
+        const menu = document.createElement("div");
+        menu.className = "select-menu";
+
+        for (const option of config.options) {
+          const isActive = option.value === config.value;
+          const optionButton = document.createElement("button");
+          optionButton.type = "button";
+          optionButton.className = "select-option";
+          optionButton.classList.toggle("active", isActive);
+
+          const optionLabel = document.createElement("span");
+          optionLabel.className = "select-option-label";
+          optionLabel.textContent = option.label;
+          optionButton.appendChild(optionLabel);
+
+          if (isActive) {
+            optionButton.insertAdjacentHTML("beforeend", getCheckSvg("select-option-check"));
+          }
+
+          optionButton.addEventListener("click", function () {
+            config.onSelect(option.value);
+            state.openSelectId = null;
+            render();
+          });
+          menu.appendChild(optionButton);
+        }
+
+        shell.appendChild(trigger);
+        shell.appendChild(menu);
+        target.appendChild(shell);
+      }
+
+      function renderDataTypeBlock() {
+        const shouldShow = shouldShowDataTypeBlock();
+        dataTypeBlock.style.display = shouldShow ? "block" : "none";
+
+        if (!shouldShow) {
+          dataTypeSelect.innerHTML = "";
           return;
         }
 
-        parent.postMessage(
-          {
-            pluginMessage: {
-              type: 'apply-random',
-              values: values,
-              successLabel: TEXT_TYPE_LABELS[state.textType]
+        renderSelect(dataTypeSelect, {
+          id: "dataType",
+          options: getCurrentDataTypeOptions(),
+          value: getCurrentDataTypeValue(),
+          placeholder: "데이터 유형 선택",
+          disabled: isDataTypeDisabled(),
+          onSelect: function (value) {
+            setCurrentDataTypeValue(value);
+          }
+        });
+      }
+
+      function renderCategoryBlock() {
+        renderSelect(categorySelect, {
+          id: "category",
+          options: CATEGORY_OPTIONS,
+          value: getCurrentCategory(),
+          placeholder: "카테고리 선택",
+          disabled: false,
+          onSelect: function (value) {
+            if (state.activeTab === "profile") {
+              state.profileCategory = value;
+            } else {
+              state.classCategory = value;
             }
-          },
-          '*'
-        );
+          }
+        });
       }
 
-      function setImageStatus(message) {
-        if (imageStatusText) {
-          imageStatusText.textContent = message;
+      function renderFooter() {
+        const targetMode = getTargetMode();
+        const selectionCount = getSelectionCountForCurrentState();
+        const hasScrollableContent = scrollArea.scrollHeight > scrollArea.clientHeight + 1;
+        const isLoading =
+          (targetMode === "image" && state.imageDataLoadState === "loading") ||
+          (targetMode === "text" && state.textDataLoadState === "loading");
+        const isError =
+          (targetMode === "image" && state.imageDataLoadState === "error") ||
+          (targetMode === "text" && state.textDataLoadState === "error");
+
+        footer.classList.toggle("has-scroll-shadow", hasScrollableContent);
+
+        const shouldShowNotice = selectionCount === 0;
+        noticeText.lastElementChild.textContent =
+          targetMode === "image" ? "적용할 이미지 레이어를 선택하세요" : "적용할 텍스트 레이어를 선택하세요";
+        noticeText.style.display = shouldShowNotice ? "flex" : "none";
+        noticeText.setAttribute("aria-hidden", shouldShowNotice ? "false" : "true");
+
+        if (state.isApplying || isLoading) {
+          applyButton.disabled = true;
+          applyButton.textContent = "불러오는 중...";
+          return;
         }
-        console.log('[ImageStatus]', message);
-      }
 
-      function setCreatorStatus(message) {
-        if (creatorStatusText) {
-          creatorStatusText.textContent = message;
+        if (isError) {
+          applyButton.disabled = true;
+          applyButton.textContent = "데이터 로드 실패";
+          return;
         }
-        console.log('[CreatorStatus]', message);
+
+        if (selectionCount === 0) {
+          applyButton.disabled = true;
+          applyButton.textContent = "선택된 레이어 없음";
+          return;
+        }
+
+        const hasValues = targetMode === "image"
+          ? getCurrentImageUrls().length > 0
+          : getTextValuesForCurrentState().length > 0;
+
+        applyButton.disabled = !hasValues;
+        applyButton.textContent =
+          "선택한 " +
+          String(selectionCount) +
+          (targetMode === "image" ? " 이미지 레이어에 적용" : " 텍스트 레이어에 적용");
       }
 
-      async function loadImageAsset(imageUrl) {
-        var response = await fetch(imageUrl);
+      function render() {
+        renderTabs();
+        renderDataKindButtons();
+        renderDataTypeBlock();
+        renderCategoryBlock();
+        renderFooter();
+      }
+
+      async function fetchJsonWithFallback(urls) {
+        let lastError = null;
+
+        for (const url of urls) {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error("status " + String(response.status));
+            }
+            return await response.json();
+          } catch (error) {
+            lastError = error;
+            console.warn("[Data] failed to load from", url, error);
+          }
+        }
+
+        throw lastError || new Error("데이터를 불러오지 못했어요.");
+      }
+
+      async function ensureTextData() {
+        if (state.courseInfoData) {
+          return state.courseInfoData;
+        }
+
+        state.textDataLoadState = "loading";
+        render();
+
+        try {
+          state.courseInfoData = await fetchJsonWithFallback(TEXT_DATA_URLS);
+          state.textDataLoadState = "ready";
+          render();
+          return state.courseInfoData;
+        } catch (error) {
+          state.textDataLoadState = "error";
+          render();
+          throw error;
+        }
+      }
+
+      async function ensureImageData() {
+        if (state.imageData) {
+          return state.imageData;
+        }
+
+        state.imageDataLoadState = "loading";
+        render();
+
+        try {
+          state.imageData = await fetchJsonWithFallback(IMAGE_DATA_URLS);
+          state.imageDataLoadState = "ready";
+          render();
+          return state.imageData;
+        } catch (error) {
+          state.imageDataLoadState = "error";
+          render();
+          throw error;
+        }
+      }
+
+      async function loadImageAsset(imageItem) {
+        const response = await fetch(imageItem.url);
 
         if (!response.ok) {
-          throw new Error('이미지 응답 오류: ' + imageUrl + ' / status ' + String(response.status));
+          throw new Error("이미지 응답 오류: " + imageItem.url + " / status " + String(response.status));
         }
 
-        var contentType = response.headers.get('content-type') || '';
+        const contentType = response.headers.get("content-type") || "";
         if (
-          contentType.indexOf('image/png') === -1 &&
-          contentType.indexOf('image/jpeg') === -1 &&
-          contentType.indexOf('image/gif') === -1
+          contentType.indexOf("image/png") === -1 &&
+          contentType.indexOf("image/jpeg") === -1 &&
+          contentType.indexOf("image/gif") === -1
         ) {
-          throw new Error('지원되지 않는 이미지 타입: ' + imageUrl + ' / ' + contentType);
+          throw new Error("지원되지 않는 이미지 타입: " + imageItem.url + " / " + contentType);
         }
 
-        var arrayBuffer = await response.arrayBuffer();
+        const arrayBuffer = await response.arrayBuffer();
         return {
-          url: imageUrl,
+          name: imageItem.name,
           bytes: new Uint8Array(arrayBuffer)
         };
       }
 
-      async function postImageApplyMessage(requestId) {
-        await ensureImageData();
-
-        var sourceCategory = state.imageView === 'creator' ? state.creatorFilterCategory : state.imageCategory;
-        var creatorOptions = getImageCreatorOptions(sourceCategory);
-        var selectedCreator = getSelectedCreator(state.creatorFilterCategory);
-        var targetOptions = [];
-        var messageCategory = sourceCategory;
-
-        if (state.imageType === 'creator') {
-          if (creatorOptions.length === 0) {
-            return;
-          }
-          targetOptions = state.imageView === 'creator' && selectedCreator ? [selectedCreator] : creatorOptions;
-        } else {
-          messageCategory = state.thumbnailCategory;
-          targetOptions = getThumbnailVariantOptions(state.thumbnailCategory, state.imageType);
-          if (targetOptions.length === 0) {
-            return;
-          }
+      async function handleApply() {
+        if (applyButton.disabled || state.isApplying) {
+          return;
         }
 
-        try {
-          setImageStatus('이미지 적용 버튼 클릭됨. 이미지를 준비하는 중이에요...');
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: 'image-apply-start',
-                requestId: requestId
-              }
-            },
-            '*'
-          );
+        const targetMode = getTargetMode();
 
-          var imageAssets = [];
+        if (targetMode === "image") {
+          state.isApplying = true;
+          render();
 
-          for (var i = 0; i < targetOptions.length; i += 1) {
-            setImageStatus('이미지 데이터 준비 중... ' + String(i + 1) + '/' + String(targetOptions.length));
-            imageAssets.push(await loadImageAsset(targetOptions[i].url));
+          try {
+            await ensureImageData();
+            const sourceItems = getCurrentImageUrls();
+            const imageAssets = [];
+
+            for (const item of sourceItems) {
+              imageAssets.push(await loadImageAsset(item));
+            }
+
+            parent.postMessage(
+              {
+                pluginMessage: {
+                  type: "apply-image-random",
+                  imageAssets: imageAssets,
+                  successLabel: getImageSuccessLabel()
+                }
+              },
+              "*"
+            );
+          } finally {
+            state.isApplying = false;
+            render();
           }
 
-          setImageStatus(String(imageAssets.length) + '개 이미지 준비 완료. 플러그인에 적용 요청을 보내는 중이에요...');
-
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: 'apply-image-random',
-                requestId: requestId,
-                imageType: state.imageType,
-                imageCategory: messageCategory,
-                imageAssets: imageAssets
-              }
-            },
-            '*'
-          );
-
-          setImageStatus('적용 요청을 보냈어요. 결과 토스트를 확인해 주세요.');
-        } catch (error) {
-          var errorMessage = error && error.message ? error.message : 'Failed to fetch';
-          parent.postMessage(
-            {
-              pluginMessage: {
-                type: 'image-apply-prep-error',
-                requestId: requestId,
-                message: errorMessage
-              }
-            },
-            '*'
-          );
-          setImageStatus('이미지 준비 단계 오류: ' + errorMessage);
+          return;
         }
+
+        await ensureTextData();
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "apply-random",
+              values: getTextValuesForCurrentState(),
+              successLabel: getTextSuccessLabel()
+            }
+          },
+          "*"
+        );
       }
 
       window.onmessage = function (event) {
-        var pluginMessage = event.data && event.data.pluginMessage;
+        const pluginMessage = event.data && event.data.pluginMessage;
         if (!pluginMessage) {
           return;
         }
 
-        if (pluginMessage.type !== 'image-apply-state') {
-          return;
+        if (pluginMessage.type === "selection-state") {
+          state.selectionState = {
+            imageCount: pluginMessage.imageCount || 0,
+            textCount: pluginMessage.textCount || 0
+          };
+          render();
         }
-
-        if (pluginMessage.requestId !== state.imageApplyRequestId) {
-          return;
-        }
-
-        state.isApplyingImage = false;
-        updateActionState();
       };
 
-      for (var i = 0; i < tabButtons.length; i += 1) {
-        tabButtons[i].addEventListener('click', function (event) {
-          updateTab(event.currentTarget.getAttribute('data-tab'));
-        });
-      }
-
-      for (var j = 0; j < typeButtons.length; j += 1) {
-        typeButtons[j].addEventListener('click', function (event) {
-          updateTypeSelection(event.currentTarget.getAttribute('data-text-type'));
-        });
-      }
-
-      for (var m = 0; m < imageTypeButtons.length; m += 1) {
-        imageTypeButtons[m].addEventListener('click', function (event) {
-          updateImageTypeSelection(event.currentTarget.getAttribute('data-image-type'));
-        });
-      }
-
-      for (var n = 0; n < imageCategoryButtons.length; n += 1) {
-        imageCategoryButtons[n].addEventListener('click', function (event) {
-          updateImageCategorySelection(event.currentTarget.getAttribute('data-image-category'));
-        });
-      }
-
-      for (var o = 0; o < thumbnailCategoryButtons.length; o += 1) {
-        thumbnailCategoryButtons[o].addEventListener('click', function (event) {
-          updateThumbnailCategorySelection(event.currentTarget.getAttribute('data-thumbnail-category'));
-        });
-      }
-
-      for (var p = 0; p < creatorFilterCategoryButtons.length; p += 1) {
-        creatorFilterCategoryButtons[p].addEventListener('click', function (event) {
-          updateCreatorFilterCategory(event.currentTarget.getAttribute('data-creator-filter-category'));
-        });
-      }
-
-      openCreatorPageButton.addEventListener('click', function () {
-        renderCreatorList();
-        updateImageView('creator');
+      document.addEventListener("click", function () {
+        if (state.openSelectId !== null) {
+          state.openSelectId = null;
+          render();
+        }
       });
 
-      backToImageMainButton.addEventListener('click', function () {
-        updateImageView('main');
-      });
-
-      for (var k = 0; k < categoryButtons.length; k += 1) {
-        categoryButtons[k].addEventListener('click', function (event) {
-          if (event.currentTarget.disabled) {
-            return;
-          }
-
-          updateCourseCategory(event.currentTarget.getAttribute('data-course-category'));
+      for (const button of tabButtons) {
+        button.addEventListener("click", function (event) {
+          state.activeTab = event.currentTarget.getAttribute("data-tab");
+          state.openSelectId = null;
+          render();
         });
       }
 
-      randomButton.addEventListener('click', function () {
-        if (randomButton.disabled) {
-          return;
-        }
-
-        if (state.activeTab === 'image') {
-          state.imageApplyRequestId += 1;
-          var requestId = state.imageApplyRequestId;
-          state.isApplyingImage = true;
-          updateActionState();
-
-          postImageApplyMessage(requestId).catch(function (error) {
-            if (requestId !== state.imageApplyRequestId) {
-              return;
-            }
-
-            state.isApplyingImage = false;
-            updateActionState();
-            console.error(error);
-            var errorMessage = error && error.message ? error.message : '알 수 없는 오류';
-            setImageStatus('이미지 준비 단계 오류: ' + errorMessage);
-          });
-          return;
-        }
-
-        postApplyMessage().catch(function (error) {
+      applyButton.addEventListener("click", function () {
+        handleApply().catch(function (error) {
           console.error(error);
+          state.isApplying = false;
+          render();
           parent.postMessage(
             {
               pluginMessage: {
-                type: 'show-toast',
-                message: '텍스트 데이터를 불러오지 못했어요.'
+                type: "show-toast",
+                message: "데이터를 불러오지 못했어요. Pages 설정을 확인해 주세요."
               }
             },
-            '*'
+            "*"
           );
         });
       });
 
-      ensureCourseInfoData().catch(function (error) {
-        console.warn('[TextData] initial load failed', error);
-      });
-      ensureImageData().catch(function (error) {
-        console.warn('[ImageData] initial load failed', error);
+      parent.postMessage({ pluginMessage: { type: "request-selection-state" } }, "*");
+
+      Promise.allSettled([ensureTextData(), ensureImageData()]).finally(function () {
+        render();
       });
 
-      updateTypeSelection('creator_name');
-      updateImageTypeSelection('creator');
-      updateImageCategorySelection('baking');
-      updateThumbnailCategorySelection('baking');
-      updateCreatorFilterCategory('all');
-      renderCreatorList();
-      updateImageView('main');
-      updateTab('image');
+      render();
     </script>
   </body>
 </html>
