@@ -1,4 +1,4 @@
-# Coloso Mock Data Plugin
+# [D1]목업 플러그인
 
 Coloso Mock Data Plugin은 Figma 목업 제작에 필요한 크리에이터/강의 텍스트와 이미지를 선택한 레이어에 빠르게 넣어주는 플러그인입니다.
 
